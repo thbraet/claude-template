@@ -1727,23 +1727,47 @@ All options covered in this template, plus those documented in `docs/CONFIGURATI
 
 ### New users installing Claude Code
 1. Install Claude Code: `npm install -g @anthropic-ai/claude-code`
-2. Clone template: `git clone https://gitlab.colruytgroup.com/devtools/claude-template.git`
+2. Clone template: `git clone https://github.com/thbraet/claude-template.git`
 3. For each project, copy the `.claude/`, `CLAUDE.md`, and `.mcp.json` into the project root
 
 ### Greenfield project
 ```bash
-cp -r /path/to/claude-template/.claude ./
-cp /path/to/claude-template/CLAUDE.md ./
-cp /path/to/claude-template/.mcp.json ./
-cat /path/to/claude-template/.gitignore.claude >> .gitignore
+git clone --depth 1 https://github.com/thbraet/claude-template.git /tmp/claude-template
+cp -r /tmp/claude-template/.claude ./
+cp /tmp/claude-template/CLAUDE.md ./
+cp /tmp/claude-template/.mcp.json ./
+cat /tmp/claude-template/.gitignore.claude >> .gitignore
+rm -rf /tmp/claude-template
 # Edit CLAUDE.md and .claude/CLAUDE.md placeholders for your project
 ```
 
 ### Brownfield project
-Same as greenfield. If `.claude/` already exists, review and merge manually. The template files are designed to be non-destructive -- `settings.local.json.example` won't overwrite anything, and `CLAUDE.md` has clear placeholder sections to fill in.
+```bash
+git clone --depth 1 https://github.com/thbraet/claude-template.git /tmp/claude-template
+cd /path/to/my-project
+
+# Safe to copy directly -- these won't conflict with existing files
+cp -r /tmp/claude-template/.claude/rules/ .claude/rules/
+cp -r /tmp/claude-template/.claude/skills/ .claude/skills/
+cp -r /tmp/claude-template/.claude/agents/ .claude/agents/
+cp -r /tmp/claude-template/.claude/commands/ .claude/commands/
+cp -r /tmp/claude-template/.claude/plugins/ .claude/plugins/
+
+# These may need manual merging if they already exist (cp -n = no-clobber)
+cp -n /tmp/claude-template/.claude/settings.json .claude/settings.json
+cp -n /tmp/claude-template/.claude/settings.local.json.example .claude/settings.local.json.example
+cp -n /tmp/claude-template/.claude/CLAUDE.md .claude/CLAUDE.md
+cp -n /tmp/claude-template/CLAUDE.md ./CLAUDE.md
+cp -n /tmp/claude-template/.mcp.json ./.mcp.json
+
+# Append Claude-specific gitignore entries (idempotent)
+grep -qxF '.claude/settings.local.json' .gitignore 2>/dev/null || cat /tmp/claude-template/.gitignore.claude >> .gitignore
+
+rm -rf /tmp/claude-template
+```
 
 ### Team customization
-Teams fork the template repo on GitLab and customize:
+Teams fork the template repo on GitHub and customize:
 - Add team-specific rules to `.claude/rules/`
 - Add team-specific skills to `.claude/skills/`
 - Add team-specific agents to `.claude/agents/`
