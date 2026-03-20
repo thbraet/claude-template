@@ -1,0 +1,75 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(git show *)",
+      "Bash(git stash *)",
+      "Bash(ls *)",
+      "Bash(tree *)",
+      "Bash(wc *)",
+      "Bash(diff *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(which *)",
+      "Bash(echo *)",
+      "Bash(cat *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(python *)",
+      "Bash(pip *)",
+      "Bash(conda *)",
+      "Bash(jupyter *)",
+      "Bash(pytest *)",
+      "Bash(mlflow *)",
+      "Bash(dvc *)",
+      "Bash(make *)",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebFetch(domain:gitlab.colruytgroup.com)",
+      "WebFetch(domain:confluence.colruytgroup.com)",
+      "WebFetch(domain:artifactory.colruytgroup.com)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)"
+    ],
+    "defaultMode": "default"
+  },
+  "model": "opus",
+  "effortLevel": "medium",
+  "autoMemoryEnabled": true,
+  "enabledPlugins": {
+    "compound-engineering@every-marketplace": true,
+    "data@knowledge-work-plugins": true
+  },
+  "env": {
+    "BASH_DEFAULT_TIMEOUT_MS": "30000",
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_ERROR_REPORTING": "1"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qiE '\\.(env|pem|key|crt|p12|pfx|jks)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"Command references a sensitive file type\"}}'; fi",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

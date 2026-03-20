@@ -1,0 +1,8 @@
+{
+  "_comment": "Copy this file to settings.local.json for personal overrides. It is gitignored.",
+  "model": "opus",
+  "effortLevel": "high",
+  "env": {
+    "MAX_THINKING_TOKENS": "16000"
+  }
+}

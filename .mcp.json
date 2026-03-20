@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+    "gitlab": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gitlab"],
+      "env": {
+        "GITLAB_API_URL": "https://gitlab.colruytgroup.com/api/v4",
+        "GITLAB_TOKEN": "${GITLAB_TOKEN}"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./data", "./reports", "./models"],
+      "_comment": "Official MCP reference server -- secure file access for data directories"
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${DATABASE_URL}"],
+      "_comment": "Official MCP reference server (archived) -- read-only database access with schema inspection"
+    },
+    "sqlite": {
+      "command": "uvx",
+      "args": ["mcp-server-sqlite", "--db-path", "${SQLITE_DB_PATH:-./data/local.db}"],
+      "_comment": "Official MCP reference server (archived) -- local database for analysis"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "_comment": "Official MCP reference server -- persistent knowledge graph for project context"
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "_comment": "Official MCP reference server -- fetch web content (APIs, documentation)"
+    }
+  }
+}
