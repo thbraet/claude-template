@@ -1,37 +1,88 @@
 # Claude Code Template for Colruyt Group
 
-A copy-paste template that configures Claude Code for data science projects following the **CRISP-DM** methodology.
+A copy-paste template that configures [Claude Code](https://docs.anthropic.com/en/docs/claude-code) for data science projects following the **CRISP-DM** methodology.
 
 ## Quick Start
 
 ### Prerequisites
 
-- [Claude Code](https://claude.com/claude-code) installed: `npm install -g @anthropic-ai/claude-code`
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed: `npm install -g @anthropic-ai/claude-code`
 
 ### Scenario 1: New (Greenfield) Project
 
 ```bash
+# Clone the template
+git clone https://github.com/thbraet/claude-template.git
+
 # Copy template files into your project
-cp -r /path/to/claude-template/.claude /path/to/my-project/
-cp /path/to/claude-template/CLAUDE.md /path/to/my-project/
-cp /path/to/claude-template/.mcp.json /path/to/my-project/
-cat /path/to/claude-template/.gitignore.claude >> /path/to/my-project/.gitignore
+cp -r claude-template/.claude /path/to/my-project/
+cp claude-template/CLAUDE.md /path/to/my-project/
+cp claude-template/.mcp.json /path/to/my-project/
+cat claude-template/.gitignore.claude >> /path/to/my-project/.gitignore
 
 # Edit placeholders in CLAUDE.md and .claude/CLAUDE.md for your project
 ```
 
 ### Scenario 2: Existing (Brownfield) Project
 
-Same as greenfield. If `.claude/` already exists, review and merge manually. Template files have clear placeholder sections.
+```bash
+# Clone the template into a temporary directory
+git clone --depth 1 https://github.com/thbraet/claude-template.git /tmp/claude-template
+
+# Copy into your existing project
+cd /path/to/my-project
+
+# Safe to copy directly -- these won't overwrite existing project files
+cp -r /tmp/claude-template/.claude/rules/ .claude/rules/
+cp -r /tmp/claude-template/.claude/skills/ .claude/skills/
+cp -r /tmp/claude-template/.claude/agents/ .claude/agents/
+cp -r /tmp/claude-template/.claude/commands/ .claude/commands/
+cp -r /tmp/claude-template/.claude/plugins/ .claude/plugins/
+
+# These files may need manual merging if they already exist
+# Review before overwriting:
+#   .claude/settings.json    -- merge permissions, hooks, env
+#   CLAUDE.md                -- merge org instructions with your existing ones
+#   .mcp.json                -- merge server definitions
+cp -n /tmp/claude-template/.claude/settings.json .claude/settings.json
+cp -n /tmp/claude-template/.claude/settings.local.json.example .claude/settings.local.json.example
+cp -n /tmp/claude-template/.claude/CLAUDE.md .claude/CLAUDE.md
+cp -n /tmp/claude-template/CLAUDE.md ./CLAUDE.md
+cp -n /tmp/claude-template/.mcp.json ./.mcp.json
+
+# Append Claude-specific gitignore entries (safe to run multiple times)
+grep -qxF '.claude/settings.local.json' .gitignore 2>/dev/null || cat /tmp/claude-template/.gitignore.claude >> .gitignore
+
+# Clean up
+rm -rf /tmp/claude-template
+
+# Edit placeholders in CLAUDE.md and .claude/CLAUDE.md for your project
+```
+
+> **Note**: `cp -n` (no-clobber) skips files that already exist. If you want to compare
+> your existing files with the template versions, use `diff` before overwriting:
+> ```bash
+> diff .claude/settings.json /tmp/claude-template/.claude/settings.json
+> ```
 
 ### Scenario 3: Team Customization
 
-Fork the template repo and customize for your team:
+Fork this repo and customize for your team:
 
 ```bash
-git clone https://gitlab.colruytgroup.com/devtools/claude-template.git
+# Fork on GitHub, then clone your fork
+git clone https://github.com/<your-org>/claude-template.git
+
 # Add team-specific rules, skills, agents
 # See docs/TEAM-CUSTOMIZATION.md
+```
+
+To stay up to date with the upstream template:
+
+```bash
+git remote add upstream https://github.com/thbraet/claude-template.git
+git fetch upstream
+git merge upstream/main
 ```
 
 ## What's Included
@@ -104,3 +155,14 @@ claude-template/
 - [Team Customization](docs/TEAM-CUSTOMIZATION.md) -- How to fork and extend
 - [CRISP-DM Workflow](docs/CRISP-DM-WORKFLOW.md) -- Skills mapped to phases
 - [MCP Servers Catalog](docs/MCP-SERVERS-CATALOG.md) -- Available MCP servers
+
+## Contributing
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes using [Conventional Commits](https://www.conventionalcommits.org/)
+4. Push and open a pull request
+
+## License
+
+Internal use at Colruyt Group.

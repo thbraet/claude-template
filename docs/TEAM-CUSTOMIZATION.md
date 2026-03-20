@@ -4,13 +4,14 @@ How to fork the template and customize it for your team.
 
 ## Getting Started
 
-1. Fork the template repo on GitLab:
+1. Fork the template repo on GitHub:
    ```bash
-   git clone https://gitlab.colruytgroup.com/devtools/claude-template.git
+   # Fork https://github.com/thbraet/claude-template on GitHub, then clone your fork
+   git clone https://github.com/<your-org>/claude-template.git
    cd claude-template
    ```
 
-2. Create a team-specific branch or fork:
+2. Create a team-specific branch:
    ```bash
    git checkout -b team/your-team-name
    ```
@@ -128,7 +129,7 @@ Add team-specific data sources:
 ## Syncing with Upstream
 
 ```bash
-git remote add upstream https://gitlab.colruytgroup.com/devtools/claude-template.git
+git remote add upstream https://github.com/thbraet/claude-template.git
 git fetch upstream
 git merge upstream/main
 # Resolve any conflicts in your customizations
