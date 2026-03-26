@@ -1,7 +1,7 @@
 {
-  "name": "colruyt-ds",
+  "name": "crisp-dm",
   "version": "1.0.0",
-  "description": "Colruyt Group data science standards, CRISP-DM workflows, and ML governance tools",
+  "description": "CRISP-DM methodology plugin — 22 commands covering all 6 phases of the Cross-Industry Standard Process for Data Mining",
   "author": "Colruyt Group Data & Analytics",
   "repository": "https://github.com/thbraet/claude-template"
 }
