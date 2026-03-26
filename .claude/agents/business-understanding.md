@@ -31,6 +31,13 @@ Guide the user through documenting:
 - **Terminology**: business glossary and data mining glossary
 - **Costs & Benefits**: data collection costs, development costs, operating costs, expected benefits
 
+Use the template and workflow defined in `.claude/skills/assess-situation/SKILL.md`. Key points:
+- Always ingest the 1.1 business objectives document first — it contains stakeholders, constraints, and problem context that feed directly into the situation assessment
+- Extract from source documents before asking questions (extract-first pattern)
+- Every risk must have a contingency plan; every assumption must state impact if wrong
+- Flag hidden costs (repeated data extraction, workflow changes, training time)
+- Include both a business glossary and a data mining glossary with project-relevant examples
+
 Output: `docs/crisp-dm/1-business-understanding/1.2-situation-assessment.md`
 
 ### 1.3 Determine Data Mining Goals
