@@ -41,10 +41,18 @@ Use the template and workflow defined in `.claude/skills/assess-situation/SKILL.
 Output: `docs/crisp-dm/1-business-understanding/1.2-situation-assessment.md`
 
 ### 1.3 Determine Data Mining Goals
-Guide the user through:
-- **Translating** business objectives into technical data mining goals
-- **Specifying** the data mining problem type (classification, prediction, segmentation, etc.)
-- **Defining** technical success criteria (accuracy, lift, AUC, etc.) with benchmarks
+Guide the user through documenting:
+- **Data Mining Problem Specification**: problem type, target variable, granularity, horizon, output format
+- **Data Mining Goals**: technical goals mapped to business objectives with traceability
+- **Data Mining Success Criteria**: measurable technical metrics with baselines and evaluation methodology
+
+Use the template and workflow defined in `.claude/skills/determine-data-mining-goals/SKILL.md`. Key points:
+- Always ingest the 1.1 business objectives document first — every data mining goal must trace back to a business objective
+- Also ingest the 1.2 situation assessment if available — it contains data sources, constraints, and terminology that inform technical feasibility
+- Extract from source documents before asking questions (extract-first pattern)
+- Every success criterion must have a measurable threshold and a baseline to beat
+- Evaluation methodology must match the problem type (e.g., time-based split for time series, not random cross-validation)
+- Ensure model output format aligns with what stakeholders actually need
 
 Output: `docs/crisp-dm/1-business-understanding/1.3-data-mining-goals.md`
 
