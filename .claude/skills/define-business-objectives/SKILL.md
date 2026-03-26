@@ -1,7 +1,7 @@
 ---
 name: define-business-objectives
-description: "CRISP-DM 1.1 — Determine Business Objectives. Guides the user through defining the business background, objectives, and success criteria for a data mining project. Produces a structured business objectives document in docs/crisp-dm/1-business-understanding/."
-argument-hint: "[optional: project name or business problem description]"
+description: "CRISP-DM 1.1 — Determine Business Objectives. Extracts business context from meeting notes, Notion pages, or other source documents, then fills gaps interactively. Produces a structured business objectives document in docs/crisp-dm/1-business-understanding/."
+argument-hint: "<path to meeting notes, Notion page URL, or project description>"
 ---
 
 # /define-business-objectives — CRISP-DM 1.1: Determine Business Objectives
@@ -12,7 +12,7 @@ argument-hint: "[optional: project name or business problem description]"
 
 ## Purpose
 
-This skill guides the user through the first and most critical task of any CRISP-DM project: understanding and documenting the business objectives. It produces three outputs:
+This skill extracts as much information as possible from source documents (meeting notes, intake call transcripts, Notion pages, etc.) and then asks the user only about what's missing. It produces three outputs:
 
 1. **Background** — organizational context, problem area, and current solution
 2. **Business Objectives** — precisely stated business questions and expected benefits
@@ -31,73 +31,93 @@ Before starting, check if the output file already exists:
 - If it exists, present its contents and ask: *"A business objectives document already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
 - If it does not exist, proceed to Step 2.
 
-### Step 2: Gather Background Information
+### Step 2: Ingest Source Documents
 
-Ask the user the following questions **one section at a time**. Do not dump all questions at once — have a conversation.
+Check if the user provided a reference (via `$ARGUMENTS` or in conversation):
 
-#### 2a: Organization Context
+- **File path** (e.g., `docs/meeting-notes.md`, `notes/intake-call.txt`) — Read the file(s)
+- **Notion page URL** — Fetch via the Notion MCP tools (`mcp__notion__API-retrieve-a-page`, `mcp__notion__API-get-block-children`)
+- **Pasted text** — Use the text directly from the conversation
+- **No input provided** — Ask: *"Do you have meeting notes, an intake call transcript, or any other document I can extract from? You can provide a file path, a Notion URL, or paste the text directly. If not, I'll guide you through the questions manually."*
 
-Ask:
-> I need to understand the organizational context for this project. Please tell me:
+Read ALL provided sources before proceeding.
+
+### Step 3: Extract and Map Information
+
+After reading the source documents, map every piece of information to the required fields below. Use this checklist internally:
+
+**Section A — Organization Context:**
+- [ ] Sponsoring business unit / department
+- [ ] Internal sponsor (name and role)
+- [ ] Key stakeholders (names, roles)
+- [ ] Organization's data mining / ML maturity
+
+**Section B — Problem Area:**
+- [ ] Problem or opportunity description
+- [ ] Project status (new vs. continuation)
+- [ ] Motivation / trigger for the project
+- [ ] Target group for results
+
+**Section C — Current Solution:**
+- [ ] Current approach in place
+- [ ] Strengths of current approach
+- [ ] Weaknesses of current approach
+- [ ] User acceptance level
+
+**Section D — Business Objectives:**
+- [ ] Primary business objective (one sentence)
+- [ ] Specific business questions
+- [ ] Business constraints
+- [ ] Expected benefits
+
+**Section E — Business Success Criteria:**
+- [ ] Measurable success criteria (with numbers/thresholds)
+- [ ] Who assesses success
+- [ ] Timeframe for results
+
+### Step 4: Present Extracted Information and Ask About Gaps
+
+Present what was extracted in a structured summary, organized by section. For each field, show one of:
+- **Extracted:** the value found in the source document(s), with a quote or reference
+- **Missing:** flag it clearly
+
+Then ask the user to:
+1. **Confirm or correct** the extracted information
+2. **Fill in the missing fields**
+
+Format the ask like this:
+
+> Here's what I extracted from your [meeting notes / Notion page / transcript]. Please review and fill in the gaps:
 >
-> 1. **Which business unit / department** is sponsoring this project? (e.g., Marketing, Supply Chain, Finance, Store Operations)
-> 2. **Who is the internal sponsor?** (the person funding or championing this)
-> 3. **Who are the key stakeholders** who will use the results?
-> 4. **Is the organization already familiar with data mining/ML**, or is this a first initiative?
+> **Organization Context**
+> - Sponsoring Unit: *[extracted value]* ✓
+> - Internal Sponsor: *[extracted value]* ✓
+> - Key Stakeholders: **MISSING** — Who are the key stakeholders?
+> - Data Mining Maturity: *[extracted value]* ✓
+>
+> **Problem Area**
+> - Problem Description: *[extracted value]* ✓
+> - ...
+>
+> **[continue for all sections]**
+>
+> Please confirm the extracted items are correct and provide the missing ones.
+
+**Important rules for this step:**
+- Ask about ALL missing fields in a single message — do not split into multiple rounds for gaps
+- If a field is ambiguous in the source, present your best interpretation and ask for confirmation
+- If objectives sound unattainable, flag them and suggest realistic alternatives
+- If success criteria are vague (no numbers), explicitly ask for measurable thresholds
 
 Wait for the user's response before continuing.
 
-#### 2b: Problem Area
+### Step 5: Clarification Round (if needed)
 
-Ask:
-> Now let's define the problem area:
->
-> 1. **What problem or opportunity** are we trying to address? (describe in general terms)
-> 2. **What is the current status** — is this a new initiative or continuation of prior work?
-> 3. **What motivated this project?** (e.g., business pain point, strategic initiative, regulatory requirement)
-> 4. **Who is the target group** for the project results? (e.g., store managers, category managers, executive team)
+If the user's response still has gaps or ambiguities:
+- Ask a focused follow-up covering only the remaining gaps
+- Maximum 2 clarification rounds — after that, mark remaining gaps as "TBD" in the document and note them in a "To be clarified" section
 
-Wait for the user's response before continuing.
-
-#### 2c: Current Solution
-
-Ask:
-> How is this problem handled today?
->
-> 1. **What solution is currently in place?** (e.g., manual process, rule-based system, existing model, Excel-based)
-> 2. **What are its strengths and weaknesses?**
-> 3. **How well is the current solution accepted** by its users?
-
-Wait for the user's response before continuing.
-
-### Step 3: Define Business Objectives
-
-Ask:
-> Let's now formulate the business objectives precisely:
->
-> 1. **What is the primary business objective?** (one sentence, e.g., "Reduce fresh product waste by 15% across Belgian stores")
-> 2. **What specific business questions** should this project answer? (list as many as relevant)
-> 3. **Are there any constraints** the business has stated? (e.g., "must not reduce product availability", "must be explainable to store managers")
-> 4. **What are the expected benefits** in business terms? (e.g., cost savings, revenue increase, efficiency gain)
-
-**Important:** If objectives sound unattainable, gently challenge them and help reformulate into realistic goals.
-
-Wait for the user's response before continuing.
-
-### Step 4: Define Business Success Criteria
-
-Ask:
-> Finally, let's define how success will be measured from a business perspective:
->
-> 1. **What specific, measurable criteria** determine if this project is successful? (e.g., "reduce churn rate by 10%", "achieve 20% improvement in forecast accuracy")
-> 2. **Who will assess** whether these criteria are met?
-> 3. **What is the timeframe** for achieving these results?
-
-**Important:** Each success criterion must map to at least one of the business objectives defined above. Validate this mapping explicitly.
-
-Wait for the user's response before continuing.
-
-### Step 5: Generate the Output Document
+### Step 6: Generate the Output Document
 
 After gathering all information, create the output directory and write the document.
 
@@ -169,6 +189,18 @@ Write the file `docs/crisp-dm/1-business-understanding/1.1-business-objectives.m
 
 ---
 
+## To Be Clarified
+
+[List any items that could not be determined from the source documents or user input. Remove this section if everything is complete.]
+
+---
+
+## Source Documents
+
+- [List the meeting notes, Notion pages, or other sources used to produce this document]
+
+---
+
 ## Sign-off
 
 | Role | Name | Date | Status |
@@ -178,7 +210,7 @@ Write the file `docs/crisp-dm/1-business-understanding/1.1-business-objectives.m
 | Data Scientist | | | Pending |
 ```
 
-### Step 6: Summary and Next Steps
+### Step 7: Summary and Next Steps
 
 After writing the document, present a summary:
 
@@ -188,6 +220,7 @@ After writing the document, present a summary:
 > - Primary objective: [restate]
 > - [N] business questions defined
 > - [N] success criteria defined
+> - [N] items still to be clarified (if any)
 >
 > **Next step in CRISP-DM:** Run `/assess-situation` to inventory resources, constraints, risks, and costs (Task 1.2).
 
