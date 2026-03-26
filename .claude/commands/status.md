@@ -82,6 +82,10 @@ Verify that all major sections expected for this document type are present and n
 | 1.2 | Inventory of Resources (Hardware, Data Sources, Knowledge Sources, Personnel), Requirements/Assumptions/Constraints, Risks & Contingencies, Terminology, Costs & Benefits |
 | 1.3 | Data Mining Problem Specification, Data Mining Goals (with Traceability table), Data Mining Success Criteria (with Baseline, Evaluation Methodology, Business-to-Technical Mapping), Scope & Constraints |
 | 1.4 | Project Overview, Project Stages (with Stage Details), Dependencies, Risk-Adjusted Timeline, Tool & Technique Assessment, Communication & Governance |
+| 2.1 | Data Acquisition Log, Initial Data Inventory (with Column Summary per dataset), Selection Rationale, Loading & Storage |
+| 2.2 | Dataset Overview, Data Dictionary (per dataset with all fields), Surface Statistics (Numeric, Categorical, Temporal), Structural Notes (Join Keys, Format Details), Initial Observations |
+| 2.3 | Exploration Overview, Univariate Analysis (Target + Key Features), Bivariate/Multivariate Analysis (Correlations, Feature-Target Relationships), Temporal Patterns (Trend, Seasonality, Structural Breaks), Subgroup Analysis, Key Findings, Feature Hypotheses, Modeling Implications |
+| 2.4 | Quality Summary (Overall Assessment with scores, Go/No-Go), Completeness (Missing Values, Coverage Gaps), Correctness (Range Violations, Business Rule Violations, Type Errors), Consistency (Duplicates, Cross-Field, Cross-Dataset), Timeliness (Freshness, Temporal Gaps), Assumption Validation, Remediation Plan |
 
 A section is "empty" if it contains only the heading, only template placeholder text, or fewer than 2 substantive lines of content.
 
