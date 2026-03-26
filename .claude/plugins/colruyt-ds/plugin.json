@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "description": "Colruyt Group data science standards, CRISP-DM workflows, and ML governance tools",
   "author": "Colruyt Group Data & Analytics",
-  "repository": "https://gitlab.colruytgroup.com/data-analytics/claude-ds-plugin"
+  "repository": "https://github.com/thbraet/claude-template"
 }
