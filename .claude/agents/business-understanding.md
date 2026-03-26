@@ -57,9 +57,21 @@ Use the template and workflow defined in `.claude/skills/determine-data-mining-g
 Output: `docs/crisp-dm/1-business-understanding/1.3-data-mining-goals.md`
 
 ### 1.4 Produce Project Plan
-Guide the user through:
-- **Project Plan**: stages, durations, resources, inputs/outputs, dependencies, decision points
-- **Tool & Technique Assessment**: evaluation of candidate tools and modeling techniques
+Guide the user through documenting:
+- **Project Stages**: CRISP-DM phases with durations, resources, inputs/outputs, deliverables, and completion criteria
+- **Dependencies & Decision Points**: stage dependencies, go/no-go gates, critical path
+- **Risk-Adjusted Timeline**: buffers mapped to risks from 1.2, contingency triggers
+- **Tool & Technique Assessment**: candidate modeling techniques and tools evaluated against project requirements
+- **Communication & Governance**: reporting cadence, stakeholder reviews, documentation requirements, version control strategy
+
+Use the template and workflow defined in `.claude/skills/produce-project-plan/SKILL.md`. Key points:
+- Always ingest the 1.1, 1.2, and 1.3 documents first — the project plan synthesizes all prior Business Understanding outputs
+- Extract from source documents before asking questions (extract-first pattern)
+- Every stage must have clear completion criteria and deliverables
+- Always include a baseline modeling technique, not just advanced approaches
+- Tool recommendations must align with Colruyt Group tooling (MLflow, DVC, GitLab CI/CD, Artifactory)
+- Risk buffers must reference specific risks from the 1.2 situation assessment
+- Documentation requirements must include model card, experiment logs, and monitoring plan per model governance rules
 
 Output: `docs/crisp-dm/1-business-understanding/1.4-project-plan.md`
 
