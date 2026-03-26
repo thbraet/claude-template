@@ -1,22 +1,26 @@
-# Project: [PROJECT_NAME]
+# Project: Store Capacity Forecast
 
 ## Business Objective
-[What business problem are we solving? Link to project charter: docs/project_charter.md]
+Predict incoming transport units (carts, pallets, boxes) per CLP store, per day, per section, 3-6 weeks ahead for workforce planning. See [1.1 Business Objectives](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md).
 
 ## CRISP-DM Phase Tracker
 | Phase | Status | Key Artifacts |
 |---|---|---|
-| 1. Business Understanding | [Not Started/In Progress/Complete] | project_charter.md |
-| 2. Data Understanding | [status] | EDA notebooks, data dictionary |
-| 3. Data Preparation | [status] | Feature pipeline, validation suite |
-| 4. Modeling | [status] | Baseline model, experiment logs |
-| 5. Evaluation | [status] | Model card, fairness audit |
-| 6. Deployment | [status] | Serving API, monitoring, runbook |
+| 1. Business Understanding | In Progress | [1.1-business-objectives.md](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md) |
+| 2. Data Understanding | Not Started | EDA notebooks, data dictionary |
+| 3. Data Preparation | Not Started | Feature pipeline, validation suite |
+| 4. Modeling | Not Started | Baseline model, experiment logs |
+| 5. Evaluation | Not Started | Model card, fairness audit |
+| 6. Deployment | Not Started | Serving API, monitoring, runbook |
 
 ## Data Sources
 | Source | Type | Access | Refresh | Description |
 |---|---|---|---|---|
-| [source] | [DB/API/File] | [how to access] | [frequency] | [what it contains] |
+| Guido Kuylit CSV | File | CSV extract | One-time (6 years) | Transport units per store per day |
+| ODCF | DB | TBD | Daily | DC outflow forecast |
+| ASB | DB | TBD | Daily | Ideal store delivery forecast |
+| Plato | DB | TBD | Weekly | Workforce planning drivers & prognoses |
+| Sales Forecast | DB | TBD | Weekly | 13-week sales forecast per store |
 
 ## Development
 - Setup environment: `[conda env create / pip install]`
