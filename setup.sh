@@ -3,7 +3,6 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ENV_FILE="$SCRIPT_DIR/.env"
-# User-scoped settings -- per-user home dir, never conflicts between users
 USER_SETTINGS_LOCAL="$HOME/.claude/settings.local.json"
 
 echo "=== Claude Code Template Setup ==="
@@ -33,77 +32,60 @@ else
   fi
 fi
 
-# --- Read tokens from .env ---
-declare -A ENV_VARS
-if [ -f "$ENV_FILE" ]; then
-  while IFS= read -r line; do
-    # Skip comments and blank lines
-    [[ -z "$line" || "$line" =~ ^# ]] && continue
-    key="${line%%=*}"
-    value="${line#*=}"
-    # Strip surrounding quotes if present
-    value="${value#\"}"
-    value="${value%\"}"
-    value="${value#\'}"
-    value="${value%\'}"
-    if [[ -n "$key" && -n "$value" ]]; then
-      ENV_VARS["$key"]="$value"
-    fi
-  done < "$ENV_FILE"
-fi
-
-# --- Check for missing tokens ---
-MISSING=()
-for key in GITLAB_TOKEN NOTION_TOKEN DATABASE_URL; do
-  if [[ -z "${ENV_VARS[$key]:-}" ]]; then
-    MISSING+=("$key")
-  fi
-done
-
-if [[ ${#MISSING[@]} -gt 0 ]]; then
-  echo ""
-  echo "[WARN] Missing tokens in .env:"
-  for key in "${MISSING[@]}"; do
-    echo "         - $key"
-  done
-  echo "       Fill them in $ENV_FILE and re-run setup.sh"
-fi
-
-# --- Merge tokens into ~/.claude/settings.local.json ---
-# User-scoped so multiple users on the same machine each get their own tokens.
-# Merges new env vars without clobbering existing settings or other projects' vars.
+# --- Merge tokens from .env into ~/.claude/settings.local.json ---
 mkdir -p "$HOME/.claude"
 
 python3 -c "
-import json, os, sys
+import json, os
 
-path = '$USER_SETTINGS_LOCAL'
+env_file = '$ENV_FILE'
+settings_path = '$USER_SETTINGS_LOCAL'
 
-# Load existing settings if present
+# Parse .env
+new_vars = {}
+if os.path.exists(env_file):
+    with open(env_file) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            if '=' not in line:
+                continue
+            key, value = line.split('=', 1)
+            key = key.strip()
+            value = value.strip().strip('\"').strip(\"'\")
+            if key and value:
+                new_vars[key] = value
+
+# Check for missing tokens
+required = ['GITLAB_TOKEN', 'NOTION_TOKEN', 'DATABASE_URL']
+missing = [k for k in required if k not in new_vars]
+if missing:
+    print()
+    print('[WARN] Missing tokens in .env:')
+    for k in missing:
+        print(f'         - {k}')
+    print(f'       Fill them in {env_file} and re-run setup.sh')
+
+# Load existing settings
 data = {}
-if os.path.exists(path):
-    with open(path) as f:
+if os.path.exists(settings_path):
+    with open(settings_path) as f:
         data = json.load(f)
 
 # Merge env vars (add/update, never remove existing keys)
 env = data.setdefault('env', {})
-new_vars = {
-$(for key in "${!ENV_VARS[@]}"; do printf "    '%s': '%s',\n" "$key" "${ENV_VARS[$key]}"; done)
-}
 env.update(new_vars)
 
-with open(path, 'w') as f:
+with open(settings_path, 'w') as f:
     json.dump(data, f, indent=2)
     f.write('\n')
 
 if new_vars:
-    print(f'[OK] Merged {len(new_vars)} env var(s) into {path}')
+    print(f'[OK] Merged {len(new_vars)} env var(s) into {settings_path}')
 else:
-    print(f'[OK] No new env vars to merge into {path}')
-" 2>/dev/null || {
-  echo "[ERROR] Failed to update $USER_SETTINGS_LOCAL -- is python3 available?"
-  exit 1
-}
+    print(f'[OK] No new env vars to merge into {settings_path}')
+"
 
 # --- Append Claude-specific gitignore entries ---
 GITIGNORE="$SCRIPT_DIR/.gitignore"
