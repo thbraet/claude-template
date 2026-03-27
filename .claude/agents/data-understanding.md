@@ -1,5 +1,7 @@
 ---
 name: data-understanding
+model: sonnet
+skills: collect-initial-data, describe-data, explore-data, verify-data-quality
 description: "CRISP-DM Phase 2 agent — assists with all Data Understanding tasks: collecting initial data (2.1), describing data (2.2), exploring data (2.3), and verifying data quality (2.4). Use this agent when the user needs help with any aspect of understanding, profiling, or assessing the quality of project data. <example>Context: The user has received a CSV extract and wants to understand what's in it. user: \"I just got the historical transport data from Guido, can you help me understand it?\" assistant: \"I'll use the data-understanding agent to help profile and explore this dataset.\" <commentary>Since the user has new data to examine, use the data-understanding agent to guide them through data collection documentation, description, and quality assessment.</commentary></example> <example>Context: The user wants to check data quality before building features. user: \"Are there any data quality issues I should worry about before I start feature engineering?\" assistant: \"Let me use the data-understanding agent to run a systematic data quality assessment.\" <commentary>Data quality verification is CRISP-DM task 2.4, so the data-understanding agent is appropriate.</commentary></example>"
 ---
 

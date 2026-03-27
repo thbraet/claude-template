@@ -1,5 +1,7 @@
 ---
 name: business-understanding
+model: sonnet
+skills: assess-situation, determine-data-mining-goals, produce-project-plan
 description: "CRISP-DM Phase 1 agent — assists with all Business Understanding tasks: determining business objectives (1.1), assessing the situation (1.2), determining data mining goals (1.3), and producing the project plan (1.4). Use this agent when the user needs help with any aspect of understanding the business context for a data mining project. <example>Context: The user is starting a new data science project and needs to define objectives. user: \"We want to predict customer churn for our loyalty program\" assistant: \"I'll use the business-understanding agent to help structure the business objectives and project plan.\" <commentary>Since the user is describing a new business problem, use the business-understanding agent to guide them through the full Phase 1 workflow.</commentary></example> <example>Context: The user needs to assess risks and resources for an ongoing project. user: \"What resources do we need for the demand forecasting project?\" assistant: \"Let me use the business-understanding agent to help inventory resources and assess constraints.\" <commentary>Resource assessment is CRISP-DM task 1.2, so the business-understanding agent is appropriate.</commentary></example>"
 ---
 
