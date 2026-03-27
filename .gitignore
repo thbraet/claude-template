@@ -2,5 +2,8 @@
 .claude/settings.local.json
 .claude/agent-memory-local/
 
+# Secrets
+.env
+
 # Notion sync state (contains page IDs, machine-specific)
 .notion-sync.json
