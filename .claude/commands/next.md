@@ -86,6 +86,11 @@ Verify that all major sections expected for this document type are present and n
 | 2.2 | Dataset Overview, Data Dictionary (per dataset with all fields), Surface Statistics (Numeric, Categorical, Temporal), Structural Notes (Join Keys, Format Details), Initial Observations |
 | 2.3 | Exploration Overview, Univariate Analysis (Target + Key Features), Bivariate/Multivariate Analysis (Correlations, Feature-Target Relationships), Temporal Patterns (Trend, Seasonality, Structural Breaks), Subgroup Analysis, Key Findings, Feature Hypotheses, Modeling Implications |
 | 2.4 | Quality Summary (Overall Assessment with scores, Go/No-Go), Completeness (Missing Values, Coverage Gaps), Correctness (Range Violations, Business Rule Violations, Type Errors), Consistency (Duplicates, Cross-Field, Cross-Dataset), Timeliness (Freshness, Temporal Gaps), Assumption Validation, Remediation Plan |
+| 3.1 | Selection Overview, Dataset Selection (with Excluded Datasets), Field Selection (per dataset with Data Leakage Assessment), Record Selection (Inclusion Criteria, Exclusion Criteria, Coverage Analysis), Selection Dependencies |
+| 3.2 | Cleaning Overview, Cleaning Plan (prioritized issues), Missing Value Treatment (Summary, Imputation Details, Indicator Variables), Outlier & Noise Treatment, Duplicate Treatment, Cleaning Impact (Before vs After, Target Variable Impact), Cleaning Code |
+| 3.3 | Construction Overview, Feature Catalog (Temporal, Aggregation, Domain-Specific, Interaction features), Generated Records, Value Transformations, Data Leakage Assessment, Feature Statistics, Construction Code |
+| 3.4 | Integration Overview, Input Datasets, Key Mappings, Integration Steps (with row counts), Conflict Resolution, Integrated Dataset Summary (Coverage Analysis, Join Quality Metrics), Integration Code |
+| 3.5 | Formatting Overview, Formatting Transformations (Type Casting, Column Operations, Encoding), Train/Validation/Test Split (Strategy, Boundaries, Statistics, Distribution Shift Check), Output Dataset Specification (Final Schema, File Locations, Loading Instructions, Version Control), Dataset Card |
 
 A section is "empty" if it contains only the heading, only template placeholder text, or fewer than 2 substantive lines of content.
 
