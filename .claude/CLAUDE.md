@@ -7,7 +7,7 @@ Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle 
 | Phase | Status | Key Artifacts |
 |---|---|---|
 | 1. Business Understanding | Complete | [1.1](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md), [1.2](docs/crisp-dm/1-business-understanding/1.2-situation-assessment.md), [1.3](docs/crisp-dm/1-business-understanding/1.3-data-mining-goals.md), [1.4](docs/crisp-dm/1-business-understanding/1.4-project-plan.md) |
-| 2. Data Understanding | Not Started | EDA notebooks, data dictionary |
+| 2. Data Understanding | In Progress | [2.1](docs/crisp-dm/2-data-understanding/2.1-data-collection.md) |
 | 3. Data Preparation | Not Started | Feature pipeline, validation suite |
 | 4. Modeling | Not Started | Modeling technique selection, test design, model building, assessment |
 | 5. Evaluation | Not Started | Result evaluation, process review, next steps |
