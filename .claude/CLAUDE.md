@@ -30,7 +30,23 @@ Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle 
 [Link to docs/adr/ for Architecture Decision Records]
 
 ## Conventions
-[Project-specific conventions beyond org standards in root CLAUDE.md]
+
+### Notebook Path Resolution
+Never use hardcoded relative paths (`../data/` or `data/`) in Jupyter notebooks. Instead, dynamically resolve the project root so notebooks work regardless of the kernel's working directory (VS Code sets cwd to project root; terminal/nbconvert may use `notebooks/`).
+
+Every notebook's first code cell must include:
+```python
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent if "__file__" in dir() else Path.cwd()
+if (PROJECT_ROOT / "notebooks").is_dir():
+    pass  # cwd is project root
+elif (PROJECT_ROOT.parent / "notebooks").is_dir():
+    PROJECT_ROOT = PROJECT_ROOT.parent  # cwd is a subdirectory
+
+DATA_DIR = PROJECT_ROOT / "data" / "raw" / "titanic"
+```
+Use `PROJECT_ROOT`-based paths for all file access in notebooks.
 
 <!-- TEAM: Add team-specific instructions below -->
 
