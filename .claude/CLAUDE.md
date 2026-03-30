@@ -10,8 +10,8 @@ Predict incoming transport units (carts, pallets, boxes) per CLP store, per day,
 | 2. Data Understanding | Not Started | EDA notebooks, data dictionary |
 | 3. Data Preparation | Not Started | Feature pipeline, validation suite |
 | 4. Modeling | Not Started | [4.1-modeling-techniques.md](docs/crisp-dm/4-modeling/4.1-modeling-techniques.md), [4.2-test-design.md](docs/crisp-dm/4-modeling/4.2-test-design.md), [4.3-model-building.md](docs/crisp-dm/4-modeling/4.3-model-building.md), [4.4-model-assessment.md](docs/crisp-dm/4-modeling/4.4-model-assessment.md) |
-| 5. Evaluation | Not Started | Model card, fairness audit |
-| 6. Deployment | Not Started | Serving API, monitoring, runbook |
+| 5. Evaluation | Not Started | [5.1-evaluate-results.md](docs/crisp-dm/5-evaluation/5.1-evaluate-results.md), [5.2-review-process.md](docs/crisp-dm/5-evaluation/5.2-review-process.md), [5.3-determine-next-steps.md](docs/crisp-dm/5-evaluation/5.3-determine-next-steps.md) |
+| 6. Deployment | Not Started | [6.1-plan-deployment.md](docs/crisp-dm/6-deployment/6.1-plan-deployment.md), [6.2-plan-monitoring.md](docs/crisp-dm/6-deployment/6.2-plan-monitoring.md), [6.3-final-report.md](docs/crisp-dm/6-deployment/6.3-final-report.md), [6.4-review-project.md](docs/crisp-dm/6-deployment/6.4-review-project.md) |
 
 ## Data Sources
 | Source | Type | Access | Refresh | Description |
