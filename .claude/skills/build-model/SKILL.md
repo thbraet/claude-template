@@ -16,18 +16,21 @@ This skill guides the systematic construction of models: starting with the basel
 
 ## Output Location
 
-- Report: `docs/crisp-dm/4-modeling/4.3-model-building.md`
-- Training code: `src/models/` or `notebooks/4.3-model-building.ipynb`
-- Model artifacts: logged to MLflow and/or `models/`
+This skill produces two artifacts plus model artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/4.3-model-building.ipynb` — contains all model training code, hyperparameter tuning, experiment logging, inline outputs, and markdown narrative. This is the working artifact where models are built and evaluated.
+2. **Summary document**: `docs/crisp-dm/4-modeling/4.3-model-building.md` — a structured summary of the model building report extracted from the notebook. This is the CRISP-DM documentation artifact.
+3. **Model artifacts**: logged to MLflow and/or `models/`
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/4-modeling/4.3-model-building.md`
-- If it exists, present its contents and ask: *"A model building report already exists. Do you want to (1) update it with new experiments, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/4.3-model-building.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/4-modeling/4.3-model-building.md` (the summary document)
+- If either exists, present what's found and ask: *"A model building [notebook/report/both] already exists. Do you want to (1) update it with new experiments, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/4-modeling/4.1-modeling-techniques.md`
@@ -161,9 +164,21 @@ Present results and ask the user:
 2. **Should we try additional configurations?**
 3. **Ready to proceed to model assessment (4.4)?**
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
 
-After all experiments, write the document.
+The Jupyter notebook at `notebooks/4.3-model-building.ipynb` should have been created during Steps 3-6 as the primary artifact where all model training code is developed and run. If not yet created, create it now using the `NotebookEdit` tool.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, MLflow configuration, load prepared data
+- **Data Pipeline** — preprocessing, splitting per 4.2 test design
+- **Baseline Model** — training, evaluation, MLflow logging
+- **Candidate Models** — for each technique: default config, tuning, best config
+- **Results Summary** — comparison table of all models vs. baseline
+- **Data Leakage Checks** — verification that no leakage occurred
+
+Ensure all code cells are executed and outputs are saved.
+
+Then write the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/4-modeling
@@ -309,9 +324,11 @@ Write the file `docs/crisp-dm/4-modeling/4.3-model-building.md` using this templ
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Model Building Report created** at `docs/crisp-dm/4-modeling/4.3-model-building.md`
+> **Model Building complete.** Two artifacts created:
+> - **Notebook:** `notebooks/4.3-model-building.ipynb` — full training code with inline outputs
+> - **Summary:** `docs/crisp-dm/4-modeling/4.3-model-building.md` — structured report
 >
 > **Summary:**
 > - [N] models built across [N] techniques
@@ -327,7 +344,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 4.3 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/4.3-model-building.ipynb` with all training code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Baseline model was built and evaluated first
 - [ ] Every model beats the baseline (or is documented as not doing so)
 - [ ] All experiments are logged to MLflow (parameters, metrics, artifacts)

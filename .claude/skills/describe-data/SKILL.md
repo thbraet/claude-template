@@ -20,16 +20,20 @@ This skill profiles each acquired dataset to produce a comprehensive data dictio
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/2-data-understanding/2.2-data-description.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/2.2-data-description.ipynb` — contains all data profiling code, inline outputs, and markdown narrative. This is the working artifact where data description analysis happens.
+2. **Summary document**: `docs/crisp-dm/2-data-understanding/2.2-data-description.md` — a structured summary of the data description report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/2-data-understanding/2.2-data-description.md`
-- If it exists, present its contents and ask: *"A data description report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/2.2-data-description.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/2-data-understanding/2.2-data-description.md` (the summary document)
+- If either exists, present what's found and ask: *"A data description [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/2-data-understanding/2.1-data-collection.md`
@@ -147,9 +151,21 @@ If the user's response still has gaps or ambiguities:
 - Ask a focused follow-up covering only the remaining gaps
 - Maximum 2 clarification rounds — after that, mark remaining gaps as "TBD" in the document
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
 
-After gathering all information, create the output directory and write the document.
+After gathering all information, first create the Jupyter notebook at `notebooks/2.2-data-description.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all profiling code and analysis happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, configuration, load data using instructions from 2.1
+- **Dataset Overview** — shape, memory usage, duplicates for each dataset
+- **Column-Level Profiling** — dtypes, nulls, unique counts, value distributions per column
+- **Surface Statistics** — describe() for numeric and categorical fields
+- **Structural Notes** — join keys, format details, grain identification
+- **Initial Observations** — red flags, noteworthy patterns, contradictions with prior documents
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Alternate between markdown cells (for narrative) and code cells (for profiling). Run code cells to generate outputs inline.
+
+Then create the summary document. Create the output directory and write the document.
 
 ```bash
 mkdir -p docs/crisp-dm/2-data-understanding
@@ -269,9 +285,11 @@ Write the file `docs/crisp-dm/2-data-understanding/2.2-data-description.md` usin
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Description Report created** at `docs/crisp-dm/2-data-understanding/2.2-data-description.md`
+> **Data Description complete.** Two artifacts created:
+> - **Notebook:** `notebooks/2.2-data-description.ipynb` — full profiling code with inline outputs
+> - **Summary:** `docs/crisp-dm/2-data-understanding/2.2-data-description.md` — structured report
 >
 > **Summary:**
 > - [N] datasets profiled with [total fields] total fields
@@ -286,7 +304,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 2.2 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/2.2-data-description.ipynb` with all profiling code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Every field in every dataset is documented in the data dictionary
 - [ ] Every field has a business description (or is marked TBD)
 - [ ] Every field has a modeling role assigned (target, feature, ID, filter, unused)

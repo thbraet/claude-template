@@ -22,16 +22,20 @@ It produces three outputs:
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/5.1-evaluate-results.ipynb` — contains all business metric computation code, success criteria validation, impact analysis, inline outputs, and markdown narrative. This is the working artifact where results evaluation happens.
+2. **Summary document**: `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md` — a structured summary of the evaluation report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md`
-- If it exists, present its contents and ask: *"An evaluation report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/5.1-evaluate-results.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md` (the summary document)
+- If either exists, present what's found and ask: *"An evaluation [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check prerequisite documents:
 - Read `docs/crisp-dm/1-business-understanding/1.1-business-objectives.md`
@@ -145,9 +149,21 @@ If the user's response reveals gaps:
 - Ask a focused follow-up covering only the remaining questions
 - Maximum 2 clarification rounds — after that, mark remaining items as "TBD"
 
-### Step 9: Generate the Output Document
+### Step 9: Create the Notebook and Generate the Output Document
 
-Create the output directory and write the document.
+First create the Jupyter notebook at `notebooks/5.1-evaluate-results.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — business metric computation and success criteria validation happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load model results and business criteria
+- **Business Objective Alignment** — code cells computing business metrics, mapping to objectives
+- **Success Criteria Assessment** — code cells for formal pass/fail evaluation per criterion
+- **Business Impact Quantification** — code cells translating technical metrics to business value
+- **Risk & Limitation Assessment** — markdown cells documenting residual risks
+- **Stakeholder Readiness** — markdown cells assessing stakeholder preparedness
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/5-evaluation
@@ -312,9 +328,11 @@ Write the file `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md` using this t
 
 ### Step 10: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Evaluation Report created** at `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md`
+> **Results Evaluation complete.** Two artifacts created:
+> - **Notebook:** `notebooks/5.1-evaluate-results.ipynb` — business metric computation with inline outputs
+> - **Summary:** `docs/crisp-dm/5-evaluation/5.1-evaluate-results.md` — structured report
 >
 > **Summary:**
 > - Overall verdict: [Ready / Conditionally Ready / Not Ready]
@@ -329,7 +347,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 5.1 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/5.1-evaluate-results.ipynb` with all evaluation code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Every business objective from 1.1 is evaluated with a clear verdict
 - [ ] Every business success criterion from 1.1 has a formal pass/fail assessment
 - [ ] Business impact is quantified in stakeholder-understandable terms

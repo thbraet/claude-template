@@ -21,16 +21,20 @@ This skill merges multiple cleaned and feature-engineered datasets into a single
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/3.4-integrate-data.ipynb` — contains all data integration code, join validation, row count tracking, inline outputs, and markdown narrative. This is the working artifact where integration operations are developed and validated.
+2. **Summary document**: `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md` — a structured summary of the data integration report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md`
-- If it exists, present its contents and ask: *"A data integration report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/3.4-integrate-data.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md` (the summary document)
+- If either exists, present what's found and ask: *"A data integration [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check prerequisite documents:
 - Read `docs/crisp-dm/3-data-preparation/3.1-select-data.md`
@@ -126,7 +130,21 @@ If the user's response still has gaps:
 - Ask a focused follow-up
 - Maximum 2 clarification rounds — mark remaining as "TBD"
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
+
+First create the Jupyter notebook at `notebooks/3.4-integrate-data.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all integration code happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load datasets from 3.1/3.2/3.3
+- **Key Mapping** — code cells for key alignment and lookup tables
+- **Integration Steps** — sequential join operations with row count tracking and assertions
+- **Conflict Resolution** — handling overlapping fields and duplicate keys
+- **Integration Validation** — verify final dataset shape, coverage, and quality
+- **Integrated Dataset Summary** — final dataset statistics
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/3-data-preparation
@@ -267,9 +285,11 @@ Write the file `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md` using th
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Integration Report created** at `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md`
+> **Data Integration complete.** Two artifacts created:
+> - **Notebook:** `notebooks/3.4-integrate-data.ipynb` — full integration code with inline outputs
+> - **Summary:** `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md` — structured report
 >
 > **Summary:**
 > - [N] datasets merged into unified analysis dataset
@@ -285,7 +305,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 3.4 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/3.4-integrate-data.ipynb` with all integration code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] All selected datasets from 3.1 are included in the integration
 - [ ] Join keys are explicitly documented for every merge step
 - [ ] Key mappings are complete and coverage percentages are reported

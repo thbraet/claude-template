@@ -21,16 +21,20 @@ This skill applies final formatting transformations to the integrated dataset (3
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/3-data-preparation/3.5-format-data.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/3.5-format-data.ipynb` — contains all formatting code, train/validation/test splitting, type casting, inline outputs, and markdown narrative. This is the working artifact where formatting operations are developed and validated.
+2. **Summary document**: `docs/crisp-dm/3-data-preparation/3.5-format-data.md` — a structured summary of the data formatting report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/3-data-preparation/3.5-format-data.md`
-- If it exists, present its contents and ask: *"A data formatting report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/3.5-format-data.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/3-data-preparation/3.5-format-data.md` (the summary document)
+- If either exists, present what's found and ask: *"A data formatting [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check prerequisite documents:
 - Read `docs/crisp-dm/3-data-preparation/3.4-integrate-data.md`
@@ -128,7 +132,23 @@ If the user's response still has gaps:
 - Ask a focused follow-up
 - Maximum 2 clarification rounds — mark remaining as "TBD"
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
+
+First create the Jupyter notebook at `notebooks/3.5-format-data.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all formatting code happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load integrated data from 3.4
+- **Type Casting** — code cells for type conversions with rationale
+- **Column Operations** — renaming, reordering, dropping intermediate columns
+- **Encoding** — categorical encoding implementations
+- **Train/Validation/Test Split** — temporal split implementation with distribution checks
+- **Split Statistics** — target distribution per split, distribution shift analysis
+- **Output Serialization** — save formatted datasets to specified format
+- **Dataset Card** — summary metadata for the modeling-ready dataset
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/3-data-preparation
@@ -293,9 +313,11 @@ X_test, y_test = test.drop(columns=["[target]"]), test["[target]"]
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Formatting Report created** at `docs/crisp-dm/3-data-preparation/3.5-format-data.md`
+> **Data Formatting complete.** Two artifacts created:
+> - **Notebook:** `notebooks/3.5-format-data.ipynb` — full formatting code with inline outputs
+> - **Summary:** `docs/crisp-dm/3-data-preparation/3.5-format-data.md` — structured report
 >
 > **Summary:**
 > - [N] type casts, [N] renames, [N] columns dropped
@@ -316,7 +338,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md`:
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/3.5-format-data.ipynb` with all formatting code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] All type casts are documented with rationale
 - [ ] Train/validation/test split uses temporal ordering (not random) for time series
 - [ ] Gap between splits is >= prediction horizon (no data leakage)

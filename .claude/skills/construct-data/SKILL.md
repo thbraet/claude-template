@@ -21,16 +21,20 @@ This skill engineers features and derives new attributes from the cleaned data (
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/3-data-preparation/3.3-construct-data.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/3.3-construct-data.ipynb` — contains all feature engineering code, feature statistics, inline outputs, and markdown narrative. This is the working artifact where features are developed and validated.
+2. **Summary document**: `docs/crisp-dm/3-data-preparation/3.3-construct-data.md` — a structured summary of the feature engineering report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/3-data-preparation/3.3-construct-data.md`
-- If it exists, present its contents and ask: *"A feature engineering report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/3.3-construct-data.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/3-data-preparation/3.3-construct-data.md` (the summary document)
+- If either exists, present what's found and ask: *"A feature engineering [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check prerequisite documents:
 - Read `docs/crisp-dm/1-business-understanding/1.3-data-mining-goals.md`
@@ -130,7 +134,24 @@ If the user's response still has gaps:
 - Ask a focused follow-up
 - Maximum 2 clarification rounds — mark remaining as "TBD"
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
+
+First create the Jupyter notebook at `notebooks/3.3-construct-data.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all feature engineering code happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load cleaned data from 3.2
+- **Feature Engineering Plan** — markdown summary of proposed features
+- **Temporal Features** — lag features, rolling statistics, calendar features
+- **Aggregation Features** — cross-sectional aggregates, hierarchical features
+- **Domain-Specific Features** — retail calendar effects, store characteristics
+- **Interaction Features** — meaningful feature interactions
+- **Value Transformations** — scaling, encoding, binning
+- **Data Leakage Validation** — verify no future information in features
+- **Feature Statistics** — summary statistics for all constructed features
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/3-data-preparation
@@ -260,9 +281,11 @@ Write the file `docs/crisp-dm/3-data-preparation/3.3-construct-data.md` using th
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Construction Report created** at `docs/crisp-dm/3-data-preparation/3.3-construct-data.md`
+> **Data Construction complete.** Two artifacts created:
+> - **Notebook:** `notebooks/3.3-construct-data.ipynb` — full feature engineering code with inline outputs
+> - **Summary:** `docs/crisp-dm/3-data-preparation/3.3-construct-data.md` — structured report
 >
 > **Summary:**
 > - [N] features constructed: [N] temporal, [N] aggregation, [N] domain, [N] interaction
@@ -278,7 +301,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 3.3 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/3.3-construct-data.ipynb` with all feature engineering code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Every feature has a documented name, formula, source fields, and rationale
 - [ ] No feature uses future information (data leakage check passed)
 - [ ] Lag features respect the prediction horizon (minimum lag >= max forecast horizon)

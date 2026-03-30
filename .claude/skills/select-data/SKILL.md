@@ -20,16 +20,20 @@ This skill decides which datasets, fields, and records from the collected data (
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/3-data-preparation/3.1-select-data.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/3.1-select-data.ipynb` — contains all data selection analysis code, coverage computations, inline outputs, and markdown narrative. This is the working artifact where selection decisions are analyzed.
+2. **Summary document**: `docs/crisp-dm/3-data-preparation/3.1-select-data.md` — a structured summary of the data selection report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/3-data-preparation/3.1-select-data.md`
-- If it exists, present its contents and ask: *"A data selection report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/3.1-select-data.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/3-data-preparation/3.1-select-data.md` (the summary document)
+- If either exists, present what's found and ask: *"A data selection [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check prerequisite documents:
 - Read `docs/crisp-dm/1-business-understanding/1.3-data-mining-goals.md`
@@ -114,9 +118,21 @@ If the user's response raises new questions:
 - Ask a focused follow-up covering only the remaining decisions
 - Maximum 2 clarification rounds — after that, mark remaining decisions as "TBD" in the document
 
-### Step 6: Generate the Output Document
+### Step 6: Create the Notebook and Generate the Output Document
 
-Create the output directory and write the document.
+First create the Jupyter notebook at `notebooks/3.1-select-data.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all selection analysis code happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load datasets from Phase 2
+- **Dataset-Level Analysis** — assess each dataset's relevance to data mining goals
+- **Field-Level Analysis** — assess each column's role, missingness, variance, leakage risk
+- **Record-Level Analysis** — date range filtering, entity coverage, completeness thresholds
+- **Coverage Analysis** — compute final dataset dimensions after selection
+- **Data Leakage Assessment** — flag potential leakage features
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document. Create the output directory and write the document.
 
 ```bash
 mkdir -p docs/crisp-dm/3-data-preparation
@@ -234,9 +250,11 @@ Write the file `docs/crisp-dm/3-data-preparation/3.1-select-data.md` using this 
 
 ### Step 7: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Selection Report created** at `docs/crisp-dm/3-data-preparation/3.1-select-data.md`
+> **Data Selection complete.** Two artifacts created:
+> - **Notebook:** `notebooks/3.1-select-data.ipynb` — full selection analysis code with inline outputs
+> - **Summary:** `docs/crisp-dm/3-data-preparation/3.1-select-data.md` — structured report
 >
 > **Summary:**
 > - [N] datasets selected out of [M] available
@@ -252,7 +270,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to mark "Data Prep
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/3.1-select-data.ipynb` with all analysis code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Every dataset from 2.1 is accounted for (selected or excluded with rationale)
 - [ ] Every field in selected datasets has a documented role (target, feature, ID, context, or excluded)
 - [ ] Data leakage risks are assessed and mitigated

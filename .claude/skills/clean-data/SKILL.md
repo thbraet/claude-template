@@ -21,16 +21,20 @@ This skill addresses all data quality issues identified in Phase 2 (task 2.4) an
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/3-data-preparation/3.2-clean-data.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/3.2-clean-data.ipynb` — contains all data cleaning code, before/after comparisons, inline outputs, and markdown narrative. This is the working artifact where cleaning operations are developed and validated.
+2. **Summary document**: `docs/crisp-dm/3-data-preparation/3.2-clean-data.md` — a structured summary of the data cleaning report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/3-data-preparation/3.2-clean-data.md`
-- If it exists, present its contents and ask: *"A data cleaning report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/3.2-clean-data.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/3-data-preparation/3.2-clean-data.md` (the summary document)
+- If either exists, present what's found and ask: *"A data cleaning [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check prerequisite documents:
 - Read `docs/crisp-dm/2-data-understanding/2.4-data-quality.md`
@@ -118,9 +122,22 @@ If the user's response still has gaps:
 - Ask a focused follow-up covering only the remaining decisions
 - Maximum 2 clarification rounds — after that, mark remaining items as "TBD"
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
 
-Create the output directory and write the document.
+First create the Jupyter notebook at `notebooks/3.2-clean-data.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all cleaning code and validation happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load selected data from 3.1
+- **Cleaning Plan** — markdown summary of planned operations
+- **Missing Value Treatment** — code cells for each imputation/drop strategy, before/after stats
+- **Outlier & Noise Treatment** — detection and treatment code, visualizations
+- **Duplicate Treatment** — deduplication code with key definitions
+- **Cleaning Impact** — before vs. after comparison tables
+- **Target Variable Validation** — verify target distribution is not significantly altered
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document. Create the output directory and write the document.
 
 ```bash
 mkdir -p docs/crisp-dm/3-data-preparation
@@ -257,9 +274,11 @@ Write the file `docs/crisp-dm/3-data-preparation/3.2-clean-data.md` using this t
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Cleaning Report created** at `docs/crisp-dm/3-data-preparation/3.2-clean-data.md`
+> **Data Cleaning complete.** Two artifacts created:
+> - **Notebook:** `notebooks/3.2-clean-data.ipynb` — full cleaning code with inline outputs
+> - **Summary:** `docs/crisp-dm/3-data-preparation/3.2-clean-data.md` — structured report
 >
 > **Summary:**
 > - [N] quality issues addressed out of [M] from 2.4
@@ -275,7 +294,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 3.2 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/3.2-clean-data.ipynb` with all cleaning code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Every quality issue from 2.4 is addressed or explicitly deferred with rationale
 - [ ] Missing value treatment is documented per field (not just globally)
 - [ ] Imputation is fit on training data only — this is explicitly stated

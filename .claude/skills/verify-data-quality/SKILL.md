@@ -22,16 +22,20 @@ This skill performs a systematic data quality assessment across four dimensions:
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/2-data-understanding/2.4-data-quality.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/2.4-data-quality.ipynb` — contains all data quality validation code, inline outputs, and markdown narrative. This is the working artifact where quality assessment happens.
+2. **Summary document**: `docs/crisp-dm/2-data-understanding/2.4-data-quality.md` — a structured summary of the data quality report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/2-data-understanding/2.4-data-quality.md`
-- If it exists, present its contents and ask: *"A data quality report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/2.4-data-quality.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/2-data-understanding/2.4-data-quality.md` (the summary document)
+- If either exists, present what's found and ask: *"A data quality [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/2-data-understanding/2.1-data-collection.md`
@@ -186,9 +190,21 @@ If the user's response reveals additional context or quality checks needed:
 - Run additional validation code
 - Maximum 2 clarification rounds — after that, finalize with what is known
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
 
-After gathering all information, create the output directory and write the document.
+After gathering all information, first create the Jupyter notebook at `notebooks/2.4-data-quality.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all validation code and analysis happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, configuration, load data
+- **Completeness Assessment** — missing values by column, missingness patterns, coverage gaps
+- **Correctness Assessment** — range violations, type errors, business rule violations
+- **Consistency Assessment** — duplicates, cross-field consistency, referential integrity
+- **Timeliness Assessment** — data freshness, temporal gaps, recording lag
+- **Quality Summary** — overall quality scorecard, go/no-go recommendation
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Alternate between markdown cells (for narrative) and code cells (for validation). Run code cells to generate outputs inline.
+
+Then create the summary document. Create the output directory and write the document.
 
 ```bash
 mkdir -p docs/crisp-dm/2-data-understanding
@@ -369,9 +385,11 @@ Write the file `docs/crisp-dm/2-data-understanding/2.4-data-quality.md` using th
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Quality Report created** at `docs/crisp-dm/2-data-understanding/2.4-data-quality.md`
+> **Data Quality Assessment complete.** Two artifacts created:
+> - **Notebook:** `notebooks/2.4-data-quality.ipynb` — full validation code with inline outputs
+> - **Summary:** `docs/crisp-dm/2-data-understanding/2.4-data-quality.md` — structured report
 >
 > **Summary:**
 > - Overall quality verdict: [Go / Go with caveats / No-go]
@@ -391,7 +409,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md`:
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/2.4-data-quality.ipynb` with all validation code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] All four quality dimensions are assessed (completeness, correctness, consistency, timeliness)
 - [ ] Every issue has a severity rating (Critical / Major / Minor)
 - [ ] Every critical and major issue has a recommended remediation action

@@ -16,16 +16,20 @@ This skill defines the experimental framework for model building: how data is sp
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/4-modeling/4.2-test-design.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/4.2-test-design.ipynb` — contains splitting strategy implementation, split validation code, distribution checks across splits, inline outputs, and markdown narrative. This is the working artifact where the test design is implemented and validated.
+2. **Summary document**: `docs/crisp-dm/4-modeling/4.2-test-design.md` — a structured summary of the test design extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/4-modeling/4.2-test-design.md`
-- If it exists, present its contents and ask: *"A test design document already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/4.2-test-design.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/4-modeling/4.2-test-design.md` (the summary document)
+- If either exists, present what's found and ask: *"A test design [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/1-business-understanding/1.3-data-mining-goals.md`
@@ -115,9 +119,21 @@ Present the full test design to the user and ask:
 
 Wait for the user's response before finalizing.
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
 
-After gathering all information, create the output directory and write the document.
+After gathering all information, first create the Jupyter notebook at `notebooks/4.2-test-design.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — splitting strategy implementation and validation code happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load prepared data
+- **Splitting Strategy Implementation** — code cells implementing the temporal/stratified split
+- **Split Validation** — code cells verifying split sizes, date boundaries, no leakage
+- **Distribution Checks** — code cells comparing target distribution across splits
+- **Metric Implementation** — code cells implementing evaluation metrics
+- **Baseline Definition** — code cells implementing the baseline model
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline.
+
+Then create the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/4-modeling
@@ -279,9 +295,11 @@ Write the file `docs/crisp-dm/4-modeling/4.2-test-design.md` using this template
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Test Design created** at `docs/crisp-dm/4-modeling/4.2-test-design.md`
+> **Test Design complete.** Two artifacts created:
+> - **Notebook:** `notebooks/4.2-test-design.ipynb` — splitting and validation code with inline outputs
+> - **Summary:** `docs/crisp-dm/4-modeling/4.2-test-design.md` — structured report
 >
 > **Summary:**
 > - Splitting strategy: [approach — e.g., temporal split with expanding window CV]
@@ -297,7 +315,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 4.2 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/4.2-test-design.ipynb` with splitting and validation code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Splitting strategy is appropriate for the problem type (temporal for time series, never random)
 - [ ] Validation period aligns with the forecast horizon
 - [ ] Test set mimics the production use case

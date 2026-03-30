@@ -21,16 +21,20 @@ This skill documents how each data source was acquired, what was received, why i
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/2-data-understanding/2.1-data-collection.md`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/2.1-data-collection.ipynb` — contains all data profiling code, inline outputs, and markdown narrative. This is the working artifact where data collection analysis happens.
+2. **Summary document**: `docs/crisp-dm/2-data-understanding/2.1-data-collection.md` — a structured summary of the data collection report extracted from the notebook. This is the CRISP-DM documentation artifact.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/2-data-understanding/2.1-data-collection.md`
-- If it exists, present its contents and ask: *"A data collection report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/2.1-data-collection.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/2-data-understanding/2.1-data-collection.md` (the summary document)
+- If either exists, present what's found and ask: *"A data collection [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/1-business-understanding/1.1-business-objectives.md`
@@ -129,9 +133,20 @@ If the user's response still has gaps or ambiguities:
 - Ask a focused follow-up covering only the remaining gaps
 - Maximum 2 clarification rounds — after that, mark remaining gaps as "TBD" in the document and note them in a "To be clarified" section
 
-### Step 7: Generate the Output Document
+### Step 7: Create the Notebook and Generate the Output Document
 
-After gathering all information, create the output directory and write the document.
+After gathering all information, first create the Jupyter notebook at `notebooks/2.1-data-collection.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all profiling code and analysis happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, configuration
+- **Data Profiling** — code cells that profile each dataset (row counts, column types, basic stats, head)
+- **Acquisition Log** — markdown cells documenting how each source was obtained
+- **Selection Rationale** — markdown cells mapping datasets to data mining goals
+- **Loading & Storage** — code cells with reproducible loading instructions
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Alternate between markdown cells (for narrative) and code cells (for profiling). Run code cells to generate outputs inline.
+
+Then create the summary document. Create the output directory and write the document.
 
 ```bash
 mkdir -p docs/crisp-dm/2-data-understanding
@@ -243,9 +258,11 @@ df = pd.read_csv("[path]", ...)
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Collection Report created** at `docs/crisp-dm/2-data-understanding/2.1-data-collection.md`
+> **Data Collection complete.** Two artifacts created:
+> - **Notebook:** `notebooks/2.1-data-collection.ipynb` — full profiling code with inline outputs
+> - **Summary:** `docs/crisp-dm/2-data-understanding/2.1-data-collection.md` — structured report
 >
 > **Summary:**
 > - [N] datasets acquired out of [M] planned
@@ -261,7 +278,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to mark "Data Unde
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/2.1-data-collection.ipynb` with all profiling code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] Every data source from 1.2 is accounted for (acquired or explained why not)
 - [ ] Every acquired dataset has row count, column count, date range, and file size
 - [ ] Every dataset has a selection rationale mapped to a data mining goal from 1.3

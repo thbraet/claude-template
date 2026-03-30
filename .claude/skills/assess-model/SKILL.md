@@ -16,17 +16,21 @@ This skill performs deep assessment of trained models beyond aggregate metrics. 
 
 ## Output Location
 
-- Report: `docs/crisp-dm/4-modeling/4.4-model-assessment.md`
-- Assessment visualizations: `reports/figures/assessment/`
+This skill produces two artifacts plus visualizations:
+
+1. **Jupyter notebook** (primary): `notebooks/4.4-model-assessment.ipynb` — contains all error analysis code, subgroup performance analysis, overfitting assessment, inline visualizations, and markdown narrative. This is the working artifact where model assessment happens.
+2. **Summary document**: `docs/crisp-dm/4-modeling/4.4-model-assessment.md` — a structured summary of the model assessment report extracted from the notebook. This is the CRISP-DM documentation artifact.
+3. **Assessment visualizations**: saved to `reports/figures/assessment/`
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/4-modeling/4.4-model-assessment.md`
-- If it exists, present its contents and ask: *"A model assessment report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/4.4-model-assessment.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/4-modeling/4.4-model-assessment.md` (the summary document)
+- If either exists, present what's found and ask: *"A model assessment [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/4-modeling/4.1-modeling-techniques.md`
@@ -156,9 +160,22 @@ Based on all assessments, recommend:
 
 Present recommendations and ask the user for confirmation.
 
-### Step 8: Generate the Output Document
+### Step 8: Create the Notebook and Generate the Output Document
 
-After gathering all information, create the output directory and write the document.
+After gathering all information, first create the Jupyter notebook at `notebooks/4.4-model-assessment.ipynb` using the `NotebookEdit` tool. The notebook is the primary artifact — all assessment code happens here.
+
+**Notebook structure:**
+- **Setup & Data Loading** — imports, load predictions and actuals from MLflow
+- **Error Analysis** — residual distribution, residuals vs predicted, residuals over time, QQ plot
+- **Worst Predictions** — identify and analyze the worst prediction cases
+- **Subgroup Performance** — performance by store, section, time period, volume level
+- **Overfitting Assessment** — train vs. validation comparison, learning curves
+- **Business Impact Translation** — metric translation, error cost asymmetry
+- **Model Selection Recommendation** — final recommendation with justification
+
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Run code cells to generate outputs inline. Save visualizations to `reports/figures/assessment/`.
+
+Then create the summary document.
 
 ```bash
 mkdir -p docs/crisp-dm/4-modeling
@@ -338,9 +355,12 @@ Write the file `docs/crisp-dm/4-modeling/4.4-model-assessment.md` using this tem
 
 ### Step 9: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Model Assessment Report created** at `docs/crisp-dm/4-modeling/4.4-model-assessment.md`
+> **Model Assessment complete.** Two artifacts created:
+> - **Notebook:** `notebooks/4.4-model-assessment.ipynb` — full assessment code with inline outputs
+> - **Summary:** `docs/crisp-dm/4-modeling/4.4-model-assessment.md` — structured report
+> - **Figures:** `reports/figures/assessment/` — assessment visualizations
 >
 > **Summary:**
 > - [N] models assessed
@@ -360,7 +380,9 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 4.4 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/4.4-model-assessment.ipynb` with all assessment code and inline outputs
+- [ ] Notebook cells are executed and outputs are saved (results render when opened)
 - [ ] All models are compared against the baseline
 - [ ] Error analysis goes beyond aggregate metrics to identify systematic patterns
 - [ ] Subgroup performance covers all key segments (stores, sections, time periods, volume levels)
