@@ -6,7 +6,7 @@ Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle 
 ## CRISP-DM Phase Tracker
 | Phase | Status | Key Artifacts |
 |---|---|---|
-| 1. Business Understanding | In Progress | [1.1-business-objectives.md](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md) |
+| 1. Business Understanding | In Progress | [1.1-business-objectives.md](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md), [1.2-situation-assessment.md](docs/crisp-dm/1-business-understanding/1.2-situation-assessment.md) |
 | 2. Data Understanding | Not Started | EDA notebooks, data dictionary |
 | 3. Data Preparation | Not Started | Feature pipeline, validation suite |
 | 4. Modeling | Not Started | Modeling technique selection, test design, model building, assessment |
