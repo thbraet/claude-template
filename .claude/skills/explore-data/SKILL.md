@@ -21,17 +21,22 @@ This skill performs deeper exploratory data analysis, going beyond the surface-l
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md`
-Visualizations are saved to: `reports/figures/eda/`
+This skill produces two artifacts:
+
+1. **Jupyter notebook** (primary): `notebooks/2.3-data-exploration.ipynb` — contains all analysis code, inline visualizations, and markdown narrative. This is the working artifact where exploration happens.
+2. **Summary document**: `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md` — a structured summary of key findings, feature hypotheses, and modeling implications extracted from the notebook. This is the CRISP-DM documentation artifact.
+
+Visualizations are also saved to `reports/figures/eda/` for use in the summary document and downstream reports.
 
 ## Workflow
 
 ### Step 1: Check for Existing Artifacts
 
-Before starting, check if the output file already exists:
-- Read `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md`
-- If it exists, present its contents and ask: *"A data exploration report already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
-- If it does not exist, proceed to Step 2.
+Before starting, check if output artifacts already exist:
+- Check for `notebooks/2.3-data-exploration.ipynb` (the primary notebook)
+- Check for `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md` (the summary document)
+- If either exists, present what's found and ask: *"A data exploration [notebook/report/both] already exists. Do you want to (1) update it, (2) start fresh, or (3) skip this step?"*
+- If neither exists, proceed to Step 2.
 
 Also check if prerequisite documents exist:
 - Read `docs/crisp-dm/2-data-understanding/2.1-data-collection.md`
@@ -83,52 +88,41 @@ Based on the data mining goals (1.3) and the data description (2.2), plan the ex
 - Identifying outlier subgroups
 - Segment-specific patterns that may require separate models
 
-### Step 4: Generate and Run Analysis Code
+### Step 4: Create the EDA Notebook
 
-For each category, generate Python code that:
-- Loads the data using instructions from 2.1
-- Performs the analysis
-- Saves visualizations to `reports/figures/eda/`
-- Prints key statistics
+Create a Jupyter notebook at `notebooks/2.3-data-exploration.ipynb` that contains all analysis code with inline visualizations and markdown narrative. The notebook is the primary artifact — all exploration happens here.
 
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import os
+**Notebook structure:**
 
-os.makedirs("reports/figures/eda", exist_ok=True)
+The notebook must be organized into clearly separated sections using markdown cells. Each section should have:
+- A markdown cell explaining what the analysis does and why (linking to data mining goals from 1.3)
+- Code cells that perform the analysis and display visualizations inline
+- A markdown cell summarizing the key findings from that section
 
-# Load data
-df = pd.read_csv("[path]")
+**Required notebook sections (as markdown headings):**
 
-# --- Univariate: Target distribution ---
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-df["[target]"].hist(bins=50, ax=axes[0])
-axes[0].set_title("[Target] Distribution")
-df.boxplot(column="[target]", ax=axes[1])
-axes[1].set_title("[Target] Box Plot")
-plt.tight_layout()
-plt.savefig("reports/figures/eda/target_distribution.png", dpi=150)
-plt.close()
+1. **Setup & Data Loading** — imports, configuration, load data using instructions from 2.1
+2. **Target Variable Analysis** — distribution, class balance, implications
+3. **Numeric Feature Distributions** — histograms, box plots, skewness, outlier detection
+4. **Categorical Feature Distributions** — bar charts, frequency tables, cardinality
+5. **Feature-Target Relationships** — survival rates by feature, cross-tabulations, statistical tests
+6. **Correlation Analysis** — correlation matrix heatmap, multicollinearity assessment
+7. **Interaction Effects** — key feature interactions (e.g., Sex x Pclass)
+8. **Temporal Patterns** — trend, seasonality, structural breaks (or state "N/A" with rationale if not a time series)
+9. **Subgroup Analysis** — target variable by key segments, outlier subgroups
+10. **Key Findings & Feature Hypotheses** — summary of findings, proposed features, data leakage risks, modeling implications
 
-# --- Correlations ---
-corr = df.select_dtypes(include='number').corr()
-plt.figure(figsize=(12, 10))
-sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", center=0)
-plt.title("Correlation Matrix")
-plt.tight_layout()
-plt.savefig("reports/figures/eda/correlation_matrix.png", dpi=150)
-plt.close()
+**Code conventions for the notebook:**
+- Set random seeds: `np.random.seed(42)`
+- Use `%matplotlib inline` for inline plots
+- Save all figures to `reports/figures/eda/` in addition to displaying them inline: `plt.savefig("reports/figures/eda/[name].png", dpi=150, bbox_inches='tight')`
+- Use clear plot titles, axis labels, and legends
+- Print key statistics as formatted tables or summary text after each analysis
+- Include the project's virtual environment kernel
 
-# --- Temporal patterns ---
-# [adapted to the specific temporal structure]
+Use the `NotebookEdit` tool to create and populate the notebook cell by cell. Alternate between markdown cells (for narrative) and code cells (for analysis). Run code cells to generate outputs and visualizations inline.
 
-# --- Subgroup analysis ---
-# [adapted to the specific segmentation]
-```
-
-Present visualizations and key findings to the user as you generate them.
+Present key visualizations and findings to the user as you build the notebook.
 
 ### Step 5: Synthesize Findings
 
@@ -149,9 +143,9 @@ Present the synthesized findings and ask the user:
 
 Wait for the user's response before finalizing.
 
-### Step 7: Generate the Output Document
+### Step 7: Generate the Summary Document
 
-After gathering all information, create the output directory and write the document.
+After the notebook is complete and the user has provided feedback, create the summary document. This document extracts the key findings from the notebook into the structured CRISP-DM format — it does not duplicate the analysis code.
 
 ```bash
 mkdir -p docs/crisp-dm/2-data-understanding
@@ -324,9 +318,12 @@ Write the file `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md` usin
 
 ### Step 8: Summary and Next Steps
 
-After writing the document, present a summary:
+After writing both artifacts, present a summary:
 
-> **Data Exploration Report created** at `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md`
+> **Data Exploration complete.** Two artifacts created:
+> - **Notebook:** `notebooks/2.3-data-exploration.ipynb` — full analysis with inline visualizations
+> - **Summary:** `docs/crisp-dm/2-data-understanding/2.3-data-exploration.md` — structured findings
+> - **Figures:** `reports/figures/eda/` — [N] visualizations saved
 >
 > **Summary:**
 > - [N] key findings documented
@@ -342,7 +339,10 @@ Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 2.3 art
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
+- [ ] Jupyter notebook exists at `notebooks/2.3-data-exploration.ipynb` with all analysis code and inline visualizations
+- [ ] Notebook has clear markdown section headings matching the 10 required sections
+- [ ] Notebook cells are executed and outputs are saved (visualizations render when opened)
 - [ ] Every analysis connects back to the data mining goals from 1.3
 - [ ] The target variable distribution is thoroughly analyzed
 - [ ] Temporal patterns are assessed (trend, seasonality, structural breaks) — critical for forecasting projects
@@ -351,7 +351,7 @@ Before finalizing the document, verify:
 - [ ] All visualizations have clear titles, axis labels, and are saved to `reports/figures/eda/`
 - [ ] Feature hypotheses are actionable and prioritized
 - [ ] Modeling implications are specific, not generic
-- [ ] Subgroup analysis covers the key segmentation variables (stores, sections)
+- [ ] Subgroup analysis covers the key segmentation variables
 - [ ] No PII or sensitive data is included in the report or visualizations
 - [ ] Code is reproducible (random seeds set, file paths explicit)
-- [ ] Document cross-references the 2.1, 2.2, and 1.3 documents where applicable
+- [ ] Summary document cross-references the notebook and the 2.1, 2.2, and 1.3 documents
