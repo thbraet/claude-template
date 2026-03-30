@@ -7,3 +7,9 @@
 
 # Notion sync state (contains page IDs, machine-specific)
 .notion-sync.json
+
+# Python virtual environment
+.venv/
+
+# Kaggle
+.kaggle/
