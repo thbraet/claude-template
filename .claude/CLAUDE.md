@@ -1,7 +1,7 @@
-# Project: Store Capacity Forecast
+# Project: Titanic Survival Prediction
 
 ## Business Objective
-Predict incoming transport units (carts, pallets, boxes) per CLP store, per day, per section, 3-6 weeks ahead for workforce planning. See [1.1 Business Objectives](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md).
+Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle test-set passengers, maximizing prediction accuracy. See [1.1 Business Objectives](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md).
 
 ## CRISP-DM Phase Tracker
 | Phase | Status | Key Artifacts |
@@ -9,18 +9,16 @@ Predict incoming transport units (carts, pallets, boxes) per CLP store, per day,
 | 1. Business Understanding | In Progress | [1.1-business-objectives.md](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md) |
 | 2. Data Understanding | Not Started | EDA notebooks, data dictionary |
 | 3. Data Preparation | Not Started | Feature pipeline, validation suite |
-| 4. Modeling | Not Started | [4.1-modeling-techniques.md](docs/crisp-dm/4-modeling/4.1-modeling-techniques.md), [4.2-test-design.md](docs/crisp-dm/4-modeling/4.2-test-design.md), [4.3-model-building.md](docs/crisp-dm/4-modeling/4.3-model-building.md), [4.4-model-assessment.md](docs/crisp-dm/4-modeling/4.4-model-assessment.md) |
-| 5. Evaluation | Not Started | [5.1-evaluate-results.md](docs/crisp-dm/5-evaluation/5.1-evaluate-results.md), [5.2-review-process.md](docs/crisp-dm/5-evaluation/5.2-review-process.md), [5.3-determine-next-steps.md](docs/crisp-dm/5-evaluation/5.3-determine-next-steps.md) |
-| 6. Deployment | Not Started | [6.1-plan-deployment.md](docs/crisp-dm/6-deployment/6.1-plan-deployment.md), [6.2-plan-monitoring.md](docs/crisp-dm/6-deployment/6.2-plan-monitoring.md), [6.3-final-report.md](docs/crisp-dm/6-deployment/6.3-final-report.md), [6.4-review-project.md](docs/crisp-dm/6-deployment/6.4-review-project.md) |
+| 4. Modeling | Not Started | Modeling technique selection, test design, model building, assessment |
+| 5. Evaluation | Not Started | Result evaluation, process review, next steps |
+| 6. Deployment | Not Started | Kaggle submission, final report |
 
 ## Data Sources
 | Source | Type | Access | Refresh | Description |
 |---|---|---|---|---|
-| Guido Kuylit CSV | File | CSV extract | One-time (6 years) | Transport units per store per day |
-| ODCF | DB | TBD | Daily | DC outflow forecast |
-| ASB | DB | TBD | Daily | Ideal store delivery forecast |
-| Plato | DB | TBD | Weekly | Workforce planning drivers & prognoses |
-| Sales Forecast | DB | TBD | Weekly | 13-week sales forecast per store |
+| train.csv | File | data/raw/titanic/ | Static | 891 passengers with survival labels |
+| test.csv | File | data/raw/titanic/ | Static | 418 passengers to predict |
+| gender_submission.csv | File | data/raw/titanic/ | Static | Baseline submission (females survive) |
 
 ## Development
 - Setup environment: `[conda env create / pip install]`
