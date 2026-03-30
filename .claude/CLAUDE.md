@@ -9,7 +9,7 @@ Predict incoming transport units (carts, pallets, boxes) per CLP store, per day,
 | 1. Business Understanding | In Progress | [1.1-business-objectives.md](docs/crisp-dm/1-business-understanding/1.1-business-objectives.md) |
 | 2. Data Understanding | Not Started | EDA notebooks, data dictionary |
 | 3. Data Preparation | Not Started | Feature pipeline, validation suite |
-| 4. Modeling | Not Started | Baseline model, experiment logs |
+| 4. Modeling | Not Started | [4.1-modeling-techniques.md](docs/crisp-dm/4-modeling/4.1-modeling-techniques.md), [4.2-test-design.md](docs/crisp-dm/4-modeling/4.2-test-design.md), [4.3-model-building.md](docs/crisp-dm/4-modeling/4.3-model-building.md), [4.4-model-assessment.md](docs/crisp-dm/4-modeling/4.4-model-assessment.md) |
 | 5. Evaluation | Not Started | Model card, fairness audit |
 | 6. Deployment | Not Started | Serving API, monitoring, runbook |
 
