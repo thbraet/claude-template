@@ -26,6 +26,34 @@ Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle 
 - Run pipeline: `[make data && make train && make evaluate]`
 - Run EDA: `[jupyter lab]`
 
+## Data Staging
+
+Raw data is **immutable** — never modify files in `data/raw/`. Each pipeline stage writes new files to `data/processed/`. Reusable logic lives in `src/` modules; notebooks document decisions and call those modules.
+
+```
+data/
+  raw/titanic/                  # IMMUTABLE source files (from Kaggle)
+    train.csv
+    test.csv
+    gender_submission.csv
+  processed/                    # Pipeline outputs (one file per stage)
+    train_clean.csv             # Task 3.2 output: missing values handled, types fixed
+    test_clean.csv
+    train_features.csv          # Task 3.3 output: engineered features added
+    test_features.csv
+
+src/                            # Reusable pipeline modules
+  __init__.py
+  cleaning.py                   # clean_dataset(df) → cleaned DataFrame
+  features.py                   # build_features(df) → DataFrame with engineered features
+```
+
+**Rules:**
+- Each stage reads from the previous stage's output (or `data/raw/` for the first stage)
+- All imputers/encoders/scalers are fit on **train only**, then applied to test
+- `src/` functions are pure: DataFrame in → DataFrame out, no side effects
+- Notebooks call `src/` functions and write results to `data/processed/`
+
 ## Key Decisions
 [Link to docs/adr/ for Architecture Decision Records]
 
