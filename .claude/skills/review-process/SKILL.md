@@ -22,7 +22,10 @@ It produces three outputs:
 
 ## Output Location
 
-All artifacts are written to: `docs/crisp-dm/5-evaluation/5.2-review-process.md`
+This skill produces two artifacts:
+
+1. **Reporting document:** `docs/crisp-dm/5-evaluation/5.2-review-process.md`
+2. **Notebook:** `notebooks/5.2-review-process.ipynb` — the primary artifact, containing programmatic documentation audits, cross-phase consistency checks, overlooked factors analysis, and a process health dashboard with visualizations
 
 ## Workflow
 
@@ -335,11 +338,29 @@ Write the file `docs/crisp-dm/5-evaluation/5.2-review-process.md` using this tem
 | Domain Expert | | | Pending |
 ```
 
-### Step 9: Summary and Next Steps
+### Step 9: Generate the Notebook
 
-After writing the document, present a summary:
+Create `notebooks/5.2-review-process.ipynb` as the primary artifact. The notebook must:
 
-> **Process Review created** at `docs/crisp-dm/5-evaluation/5.2-review-process.md`
+1. **Follow notebook conventions:** Title/Author/Date/Phase header cell, dynamic `PROJECT_ROOT` resolution, imports in first code cell, Conclusions cell at the end.
+2. **Programmatic documentation audit:** Scan all expected CRISP-DM doc and notebook paths for existence; count lines, words, assumptions, and business questions per document; display results in styled DataFrames.
+3. **Cross-phase consistency checks:** Define each check as structured data; display pass/gap/fail status with color-coded styling.
+4. **Phase-by-phase quality assessment:** Summarize each phase's quality rating, key strength, key gap, and key decision in a styled table.
+5. **Overlooked factors analysis:** Categorize by Data/Modeling/Business and severity (Critical/Major/Minor); display with color-coded severity.
+6. **Process health dashboard:** A 2x2 matplotlib figure with:
+   - Phase quality bar chart
+   - Cross-phase consistency results
+   - Overlooked factors by category and severity
+   - Process health scorecard (documents, notebooks, consistency, issues)
+7. **Final verdict:** Print the overall process health assessment, strengths, weaknesses, and recommended actions.
+
+### Step 10: Summary and Next Steps
+
+After writing both artifacts, present a summary:
+
+> **Process Review created:**
+> - Report: `docs/crisp-dm/5-evaluation/5.2-review-process.md`
+> - Notebook: `notebooks/5.2-review-process.ipynb`
 >
 > **Summary:**
 > - Overall process health: [Strong / Adequate / Needs Improvement]
@@ -350,11 +371,11 @@ After writing the document, present a summary:
 >
 > **Next step in CRISP-DM:** Run `/determine-next-steps` to decide whether to deploy, iterate, or revise the project (Task 5.3).
 
-Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 5.2 artifact link.
+Also update the CRISP-DM phase tracker in `.claude/CLAUDE.md` to add the 5.2 artifact links (doc + notebook).
 
 ## Quality Checks
 
-Before finalizing the document, verify:
+Before finalizing, verify:
 - [ ] All existing CRISP-DM documents were reviewed
 - [ ] Each phase is assessed for execution quality and methodology rigor
 - [ ] Cross-phase consistency is checked systematically
@@ -363,5 +384,7 @@ Before finalizing the document, verify:
 - [ ] Recommended actions are prioritized and specific
 - [ ] Process shortcuts or compromises are documented honestly
 - [ ] The review is objective — acknowledging strengths, not just weaknesses
-- [ ] No PII in the document
+- [ ] No PII in the document or notebook
 - [ ] Source documents are referenced for traceability
+- [ ] Notebook exists at `notebooks/5.2-review-process.ipynb` with programmatic audit, consistency checks, and process health dashboard
+- [ ] Notebook follows conventions: dynamic PROJECT_ROOT, imports in first code cell, Conclusions cell at the end
