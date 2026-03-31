@@ -87,16 +87,13 @@ else:
     print(f'[OK] No new env vars to merge into {settings_path}')
 "
 
-# --- Append Claude-specific gitignore entries ---
+# --- Ensure Claude-specific gitignore entries ---
 GITIGNORE="$SCRIPT_DIR/.gitignore"
-GITIGNORE_CLAUDE="$SCRIPT_DIR/.gitignore.claude"
-if [ -f "$GITIGNORE_CLAUDE" ]; then
-  if ! grep -qxF '.claude/settings.local.json' "$GITIGNORE" 2>/dev/null; then
-    cat "$GITIGNORE_CLAUDE" >> "$GITIGNORE"
-    echo "[UPDATED] .gitignore with Claude-specific entries"
-  else
-    echo "[OK] .gitignore already has Claude entries"
-  fi
+if ! grep -qxF '.claude/settings.local.json' "$GITIGNORE" 2>/dev/null; then
+  printf '\n# Claude Code\n.claude/settings.local.json\n.claude/agent-memory-local/\n' >> "$GITIGNORE"
+  echo "[UPDATED] .gitignore with Claude-specific entries"
+else
+  echo "[OK] .gitignore already has Claude entries"
 fi
 
 echo ""
