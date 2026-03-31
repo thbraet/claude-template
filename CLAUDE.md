@@ -62,6 +62,3 @@ Use Conventional Commits with optional CRISP-DM phase scope:
 - Every engineered feature must be documented (name, formula, source, rationale)
 - Check for data leakage at every stage
 
-<!-- TEAM: Add team-specific instructions below this line -->
-
-<!-- PROJECT: Fill in project-specific details below this line -->

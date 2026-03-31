@@ -21,10 +21,9 @@ Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle 
 | gender_submission.csv | File | data/raw/titanic/ | Static | Baseline submission (females survive) |
 
 ## Development
-- Setup environment: `[conda env create / pip install]`
-- Run tests: `[pytest]`
-- Run pipeline: `[make data && make train && make evaluate]`
-- Run EDA: `[jupyter lab]`
+- Activate environment: `source .venv/bin/activate`
+- Run notebooks: `jupyter lab`
+- Run setup: `bash setup.sh`
 
 ## Data Staging
 
@@ -55,7 +54,8 @@ src/                            # Reusable pipeline modules
 - Notebooks call `src/` functions and write results to `data/processed/`
 
 ## Key Decisions
-[Link to docs/adr/ for Architecture Decision Records]
+- Age imputation uses title-group medians (see `src/cleaning.py`)
+- Cleaning parameters are fit on train only, applied to both train and test
 
 ## Conventions
 
@@ -76,6 +76,3 @@ DATA_DIR = PROJECT_ROOT / "data" / "raw" / "titanic"
 ```
 Use `PROJECT_ROOT`-based paths for all file access in notebooks.
 
-<!-- TEAM: Add team-specific instructions below -->
-
-<!-- PROJECT: Add project-specific context below -->
