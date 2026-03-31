@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/tba8ydd/Documents/claude-template/mlruns/447419349310909077/25d0c0dd1a0d493cac1ce30ba85978ee/artifacts
+end_time: 1774959666440
+entry_point_name: ''
+experiment_id: '447419349310909077'
+lifecycle_stage: active
+run_id: 25d0c0dd1a0d493cac1ce30ba85978ee
+run_name: logistic-regression-tuned-20260331
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774959666391
+status: 3
+tags: []
+user_id: tba8ydd

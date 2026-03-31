@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/tba8ydd/Documents/claude-template/mlruns/447419349310909077/e177b3b2b15b41388fc5b7a58676c745/artifacts
+end_time: 1774959685606
+entry_point_name: ''
+experiment_id: '447419349310909077'
+lifecycle_stage: active
+run_id: e177b3b2b15b41388fc5b7a58676c745
+run_name: xgboost-tuned-20260331
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774959685530
+status: 3
+tags: []
+user_id: tba8ydd

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/tba8ydd/Documents/claude-template/mlruns/447419349310909077/fb0cd54ef1164dd0b40da24d49ad9049/artifacts
+end_time: 1774959664188
+entry_point_name: ''
+experiment_id: '447419349310909077'
+lifecycle_stage: active
+run_id: fb0cd54ef1164dd0b40da24d49ad9049
+run_name: gender-baseline-baseline-20260331
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774959664152
+status: 3
+tags: []
+user_id: tba8ydd
