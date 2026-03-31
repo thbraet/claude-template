@@ -57,6 +57,21 @@ src/                            # Reusable pipeline modules
 - Age imputation uses title-group medians (see `src/cleaning.py`)
 - Cleaning parameters are fit on train only, applied to both train and test
 
+## Assumptions & Business Validation Convention
+
+Every CRISP-DM reporting doc (`docs/crisp-dm/**/*.md`) includes an **"Assumptions & Business Validation"** section (placed before "Source Documents") with three subsections:
+
+1. **Assumptions Made** — table with columns: ID, Assumption, Category, Rationale, Status. IDs follow the pattern `A{task}-{n}` (e.g., `A3.2-1`). Status is one of: `Pending verification`, `Verified`, `Reworked (see feedback)`, `Rejected`.
+2. **Questions for Business** — table with columns: ID, Question, Related Assumption, Priority, Status. IDs follow `Q{task}-{n}`. Status is one of: `Open`, `Answered`, `Closed`.
+3. **Business Feedback Log** — table with columns: Date, Feedback Source, Related Assumption/Question, Feedback, Action Taken, Code/Doc Changes.
+
+**When business feedback is received:**
+1. Log the feedback in the relevant doc's Business Feedback Log
+2. Update the related Assumption status (to `Verified`, `Reworked`, or `Rejected`)
+3. Update the related Question status (to `Answered` or `Closed`)
+4. Implement any required code changes
+5. Document the code/doc changes in the feedback log row
+
 ## Conventions
 
 ### Notebook Path Resolution
