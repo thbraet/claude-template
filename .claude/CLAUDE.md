@@ -11,7 +11,7 @@ Build a binary classifier that predicts passenger survival (0/1) for 418 Kaggle 
 | 3. Data Preparation | Complete | [3.1](docs/crisp-dm/3-data-preparation/3.1-select-data.md), [3.2](docs/crisp-dm/3-data-preparation/3.2-clean-data.md), [3.3](docs/crisp-dm/3-data-preparation/3.3-construct-data.md), [3.4](docs/crisp-dm/3-data-preparation/3.4-integrate-data.md), [3.5](docs/crisp-dm/3-data-preparation/3.5-format-data.md); Notebooks: [3.1](notebooks/3.1-select-data.ipynb), [3.2](notebooks/3.2-clean-data.ipynb), [3.3](notebooks/3.3-construct-data.ipynb), [3.4](notebooks/3.4-integrate-data.ipynb), [3.5](notebooks/3.5-format-data.ipynb) |
 | 4. Modeling | Complete | [4.1](docs/crisp-dm/4-modeling/4.1-modeling-techniques.md), [4.2](docs/crisp-dm/4-modeling/4.2-test-design.md), [4.3](docs/crisp-dm/4-modeling/4.3-model-building.md), [4.4](docs/crisp-dm/4-modeling/4.4-model-assessment.md); Notebooks: [4.1](notebooks/4.1-modeling-techniques.ipynb), [4.2](notebooks/4.2-test-design.ipynb), [4.3](notebooks/4.3-model-building.ipynb), [4.4](notebooks/4.4-model-assessment.ipynb) |
 | 5. Evaluation | Complete | [5.1](docs/crisp-dm/5-evaluation/5.1-evaluate-results.md), [5.2](docs/crisp-dm/5-evaluation/5.2-review-process.md), [5.3](docs/crisp-dm/5-evaluation/5.3-determine-next-steps.md); Notebooks: [5.1](notebooks/5.1-evaluate-results.ipynb), [5.2](notebooks/5.2-review-process.ipynb) |
-| 6. Deployment | In Progress | [6.1](docs/crisp-dm/6-deployment/6.1-plan-deployment.md); Kaggle submission, final report |
+| 6. Deployment | In Progress | [6.1](docs/crisp-dm/6-deployment/6.1-plan-deployment.md), [6.2](docs/crisp-dm/6-deployment/6.2-plan-monitoring.md); Kaggle submission, final report |
 
 ## Data Sources
 | Source | Type | Access | Refresh | Description |
