@@ -1,62 +1,133 @@
-<div class="sc-DZJJV hpTdMa sc-hAUqM hhoHSE"><div class="sc-kUouGy ddOypF"><div id="Description" class="sc-hFRjDq dLSpYd"><div class="sc-eaGtAs ijYgyd"><div class="sc-bgwTQZ loFwWa"><div class="sc-fFczXa ccZeZE"><h3 class="sc-eqYatC sc-cKTanH fQcMPC dBkSEb">Description</h3></div></div><button aria-label="Copy link" title="Copy link" class="sc-koBvLg bYJwBT google-symbols notranslate">link</button></div></div><button aria-label="Collapse " title="Collapse " class="sc-koBvLg bYJwBT google-symbols notranslate" aria-expanded="true" style="flex-shrink: 0;">keyboard_arrow_up</button></div><div><div class="sc-iYlCS cYVrzj"><div class="sc-jCWzJg uSqtx"><h2>👋🛳️ Ahoy, welcome to Kaggle! You’re in the right place.</h2>
-<p>This is the legendary Titanic ML competition – the best, first challenge for you to dive into ML competitions and familiarize yourself with how the Kaggle platform works.</p>
-<p><strong>If you want to talk with other users about this competition, come join our Discord! We've got channels for competitions, job postings and career discussions, resources, and socializing with your fellow data scientists. Follow the link here:</strong> <a href="https://discord.gg/kaggle" target="_blank" aria-label="https://discord.gg/kaggle (opens in a new tab)" rel="noreferrer nofollow">https://discord.gg/kaggle</a></p>
-<p>The competition is simple: use machine learning to create a model that predicts which passengers survived the Titanic shipwreck.</p>
-<p>Read on or watch the video below to explore more details. Once you’re ready to start competing, click on the <a href="https://www.kaggle.com/account/login?returnUrl=%2Fc%2Ftitanic" target="_blank" aria-label="">"Join Competition button</a> to create an account and gain access to the <a href="https://www.kaggle.com/c/titanic/data" target="_blank" aria-label="competition data (opens in a new tab)">competition data</a>. Then check out <a href="https://www.kaggle.com/alexisbcook/titanic-tutorial">Alexis Cook’s Titanic Tutorial</a> that walks you through step by step how to make your first submission!</p>
-<iframe width="699" height="368" src="https://www.youtube.com/embed/8yZMXCaFshs" title="Youtube Video" frameborder="0" allow="encryped-media" allowfullscreen="" referrerpolicy="strict-origin"></iframe>
-<h2>The Challenge</h2>
-<p>The sinking of the Titanic is one of the most infamous shipwrecks in history.</p>
-<p>On April 15, 1912, during her maiden voyage, the widely considered “unsinkable” RMS Titanic sank after colliding with an iceberg. Unfortunately, there weren’t enough lifeboats for everyone onboard, resulting in the death of 1502 out of 2224 passengers and crew.</p>
-<p>While there was some element of luck involved in surviving, it seems some groups of people were more likely to survive than others.</p>
-<p>In this challenge, we ask you to build a predictive model that answers the question: “what sorts of people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic class, etc).</p>
-<blockquote>
-  <h4>Recommended Tutorial</h4>
-  <p>We highly recommend <a href="https://www.kaggle.com/alexisbcook/titanic-tutorial" target="_blank" aria-label="Alexis Cook’s Titanic Tutorial (opens in a new tab)">Alexis Cook’s Titanic Tutorial</a> that walks you through making your very first submission step by step and <a href="https://www.kaggle.com/code/gusthema/titanic-competition-w-tensorflow-decision-forests" target="_blank" aria-label="this starter notebook (opens in a new tab)">this starter notebook</a> to get started.</p>
-</blockquote>
-<h2>How Kaggle’s Competitions Work</h2>
-<ol>
-<li><strong>Join the Competition</strong>
-Read about the challenge description, accept the Competition Rules and gain access to the competition dataset.</li>
-<li><strong>Get to Work</strong>
-Download the data, build models on it locally or on Kaggle Notebooks (our no-setup, customizable Jupyter Notebooks environment with free GPUs) and generate a prediction file.</li>
-<li><strong>Make a Submission</strong>
-Upload your prediction as a submission on Kaggle and receive an accuracy score.</li>
-<li><strong>Check the Leaderboard</strong>
-See how your model ranks against other Kagglers on our leaderboard. </li>
-<li><strong>Improve Your Score</strong>
-Check out the <a href="https://www.kaggle.com/c/titanic/discussion" target="_blank" aria-label="discussion forum (opens in a new tab)">discussion forum</a> to find lots of tutorials and insights from other competitors.</li>
-</ol>
-<blockquote>
-  <h4>Kaggle Lingo Video</h4>
-  <p>You may run into unfamiliar lingo as you dig into the Kaggle discussion forums and public notebooks. Check out  Dr. Rachael Tatman’s <a href="https://www.youtube.com/watch?v=sEJHyuWKd-s" target="_blank" aria-label="video on Kaggle Lingo (opens in a new tab)" rel="noreferrer nofollow">video on Kaggle Lingo</a> to get up to speed!</p>
-</blockquote>
-<h2>What Data Will I Use in This Competition?</h2>
-<p>In this competition, you’ll gain access to two similar datasets that include passenger information like name, age, gender, socio-economic class, etc. One dataset is titled <code>train.csv</code> and the other is titled <code>test.csv</code>.</p>
-<p><code>Train.csv</code> will contain the details of a subset of the passengers on board (891 to be exact) and importantly, will reveal whether they survived or not, also known as the “ground truth”.</p>
-<p>The <code>test.csv</code> dataset contains similar information but does not disclose the “ground truth” for each passenger. It’s your job to predict these outcomes.</p>
-<p>Using the patterns you find in the <code>train.csv</code> data, predict whether the other 418 passengers on board (found in <code>test.csv</code>) survived.</p>
-<p>Check out the <a href="https://www.kaggle.com/c/titanic/data">“Data” tab</a> to explore the datasets even further. Once you feel you’ve created a competitive model, submit it to Kaggle to see where your model stands on our leaderboard against other Kagglers.</p>
-<h2>How to Submit your Prediction to Kaggle</h2>
-<p>Once you’re ready to make a submission and get on the leaderboard:</p>
-<ol>
-<li>Click on the “Submit Predictions” button
-<img width="699" src="https://storage.googleapis.com/kaggle-media/welcome/screen1.png" alt=""></li>
-<li>Upload a CSV file in the submission file format. You’re able to submit 10 submissions a day.
-<img width="699" src="https://storage.googleapis.com/kaggle-media/welcome/screen2.png" alt=""></li>
-</ol>
-<h2>Submission File Format:</h2>
-<p>You should submit a csv file with exactly 418 entries plus a header row. Your submission will show an error if you have extra columns (beyond <code>PassengerId</code> and <code>Survived</code>) or rows.</p>
-<p>The file should have exactly 2 columns:</p>
-<ul>
-<li><code>PassengerId</code> (sorted in any order)</li>
-<li><code>Survived</code> (contains your binary predictions: 1 for survived, 0 for deceased)</li>
-</ul>
-<h2>Got it! I’m ready to get started. Where do I get help if I need it?</h2>
-<ul>
-<li>For Competition Help: <a href="https://www.kaggle.com/c/titanic/discussion">Titanic Discussion Forum</a></li>
-</ul>
-<p>Kaggle doesn’t have a dedicated team to help troubleshoot your code so you’ll typically find that you receive a response more quickly by asking your question in the appropriate forum. The forums are full of useful information on the data, metric, and different approaches. We encourage you to use the forums often. If you share your knowledge, you'll find that others will share a lot in turn!</p>
-<h2>A Last Word on Kaggle Notebooks</h2>
-<p>As we mentioned before, Kaggle Notebooks is our no-setup, customizable, Jupyter Notebooks environment with free GPUs and a huge repository of community published data &amp; code.</p>
-<p>In every competition, you’ll find many Notebooks shared with incredible insights. It’s an invaluable resource worth becoming familiar with. Check out this competition’s Notebooks <a href="https://www.kaggle.com/c/titanic/notebooks">here</a>.</p>
-<h2>🏃‍♀Ready to Compete? <a href="https://www.kaggle.com/account/login?returnUrl=%2Fc%2Ftitanic">Join the Competition Here!</a></h2></div></div></div></div>
+<div class="sc-DZJJV hpTdMa sc-hAUqM hhoHSE">
+    <div class="sc-kUouGy ddOypF">
+        <div id="Description" class="sc-hFRjDq dLSpYd">
+            <div class="sc-eaGtAs ijYgyd">
+                <div class="sc-bgwTQZ loFwWa">
+                    <div class="sc-fFczXa ccZeZE">
+                        <h3 class="sc-eqYatC sc-cKTanH fQcMPC dBkSEb">Description</h3>
+                    </div>
+                </div><button aria-label="Copy link" title="Copy link"
+                    class="sc-koBvLg bYJwBT google-symbols notranslate">link</button>
+            </div>
+        </div><button aria-label="Collapse " title="Collapse " class="sc-koBvLg bYJwBT google-symbols notranslate"
+            aria-expanded="true" style="flex-shrink: 0;">keyboard_arrow_up</button>
+    </div>
+    <div>
+        <div class="sc-iYlCS cYVrzj">
+            <div class="sc-jCWzJg uSqtx">
+                <h2>👋🛳️ Ahoy, welcome to Kaggle! You’re in the right place.</h2>
+                <p>This is the legendary Titanic ML competition – the best, first challenge for you to dive into ML
+                    competitions and familiarize yourself with how the Kaggle platform works.</p>
+                <p><strong>If you want to talk with other users about this competition, come join our Discord! We've got
+                        channels for competitions, job postings and career discussions, resources, and socializing with
+                        your fellow data scientists. Follow the link here:</strong> <a href="https://discord.gg/kaggle"
+                        target="_blank" aria-label="https://discord.gg/kaggle (opens in a new tab)"
+                        rel="noreferrer nofollow">https://discord.gg/kaggle</a></p>
+                <p>The competition is simple: use machine learning to create a model that predicts which passengers
+                    survived the Titanic shipwreck.</p>
+                <p>Read on or watch the video below to explore more details. Once you’re ready to start competing, click
+                    on the <a href="https://www.kaggle.com/account/login?returnUrl=%2Fc%2Ftitanic" target="_blank"
+                        aria-label="">"Join Competition button</a> to create an account and gain access to the <a
+                        href="https://www.kaggle.com/c/titanic/data" target="_blank"
+                        aria-label="competition data (opens in a new tab)">competition data</a>. Then check out <a
+                        href="https://www.kaggle.com/alexisbcook/titanic-tutorial">Alexis Cook’s Titanic Tutorial</a>
+                    that walks you through step by step how to make your first submission!</p>
+                <iframe width="699" height="368" src="https://www.youtube.com/embed/8yZMXCaFshs" title="Youtube Video"
+                    frameborder="0" allow="encryped-media" allowfullscreen="" referrerpolicy="strict-origin"></iframe>
+                <h2>The Challenge</h2>
+                <p>The sinking of the Titanic is one of the most infamous shipwrecks in history.</p>
+                <p>On April 15, 1912, during her maiden voyage, the widely considered “unsinkable” RMS Titanic sank
+                    after colliding with an iceberg. Unfortunately, there weren’t enough lifeboats for everyone onboard,
+                    resulting in the death of 1502 out of 2224 passengers and crew.</p>
+                <p>While there was some element of luck involved in surviving, it seems some groups of people were more
+                    likely to survive than others.</p>
+                <p>In this challenge, we ask you to build a predictive model that answers the question: “what sorts of
+                    people were more likely to survive?” using passenger data (ie name, age, gender, socio-economic
+                    class, etc).</p>
+                <blockquote>
+                    <h4>Recommended Tutorial</h4>
+                    <p>We highly recommend <a href="https://www.kaggle.com/alexisbcook/titanic-tutorial" target="_blank"
+                            aria-label="Alexis Cook’s Titanic Tutorial (opens in a new tab)">Alexis Cook’s Titanic
+                            Tutorial</a> that walks you through making your very first submission step by step and <a
+                            href="https://www.kaggle.com/code/gusthema/titanic-competition-w-tensorflow-decision-forests"
+                            target="_blank" aria-label="this starter notebook (opens in a new tab)">this starter
+                            notebook</a> to get started.</p>
+                </blockquote>
+                <h2>How Kaggle’s Competitions Work</h2>
+                <ol>
+                    <li><strong>Join the Competition</strong>
+                        Read about the challenge description, accept the Competition Rules and gain access to the
+                        competition dataset.</li>
+                    <li><strong>Get to Work</strong>
+                        Download the data, build models on it locally or on Kaggle Notebooks (our no-setup, customizable
+                        Jupyter Notebooks environment with free GPUs) and generate a prediction file.</li>
+                    <li><strong>Make a Submission</strong>
+                        Upload your prediction as a submission on Kaggle and receive an accuracy score.</li>
+                    <li><strong>Check the Leaderboard</strong>
+                        See how your model ranks against other Kagglers on our leaderboard. </li>
+                    <li><strong>Improve Your Score</strong>
+                        Check out the <a href="https://www.kaggle.com/c/titanic/discussion" target="_blank"
+                            aria-label="discussion forum (opens in a new tab)">discussion forum</a> to find lots of
+                        tutorials and insights from other competitors.</li>
+                </ol>
+                <blockquote>
+                    <h4>Kaggle Lingo Video</h4>
+                    <p>You may run into unfamiliar lingo as you dig into the Kaggle discussion forums and public
+                        notebooks. Check out Dr. Rachael Tatman’s <a href="https://www.youtube.com/watch?v=sEJHyuWKd-s"
+                            target="_blank" aria-label="video on Kaggle Lingo (opens in a new tab)"
+                            rel="noreferrer nofollow">video on Kaggle Lingo</a> to get up to speed!</p>
+                </blockquote>
+                <h2>What Data Will I Use in This Competition?</h2>
+                <p>In this competition, you’ll gain access to two similar datasets that include passenger information
+                    like name, age, gender, socio-economic class, etc. One dataset is titled <code>train.csv</code> and
+                    the other is titled <code>test.csv</code>.</p>
+                <p><code>Train.csv</code> will contain the details of a subset of the passengers on board (891 to be
+                    exact) and importantly, will reveal whether they survived or not, also known as the “ground truth”.
+                </p>
+                <p>The <code>test.csv</code> dataset contains similar information but does not disclose the “ground
+                    truth” for each passenger. It’s your job to predict these outcomes.</p>
+                <p>Using the patterns you find in the <code>train.csv</code> data, predict whether the other 418
+                    passengers on board (found in <code>test.csv</code>) survived.</p>
+                <p>Check out the <a href="https://www.kaggle.com/c/titanic/data">“Data” tab</a> to explore the datasets
+                    even further. Once you feel you’ve created a competitive model, submit it to Kaggle to see where
+                    your model stands on our leaderboard against other Kagglers.</p>
+                <h2>How to Submit your Prediction to Kaggle</h2>
+                <p>Once you’re ready to make a submission and get on the leaderboard:</p>
+                <ol>
+                    <li>Click on the “Submit Predictions” button
+                        <img width="699" src="https://storage.googleapis.com/kaggle-media/welcome/screen1.png" alt="">
+                    </li>
+                    <li>Upload a CSV file in the submission file format. You’re able to submit 10 submissions a day.
+                        <img width="699" src="https://storage.googleapis.com/kaggle-media/welcome/screen2.png" alt="">
+                    </li>
+                </ol>
+                <h2>Submission File Format:</h2>
+                <p>You should submit a csv file with exactly 418 entries plus a header row. Your submission will show an
+                    error if you have extra columns (beyond <code>PassengerId</code> and <code>Survived</code>) or rows.
+                </p>
+                <p>The file should have exactly 2 columns:</p>
+                <ul>
+                    <li><code>PassengerId</code> (sorted in any order)</li>
+                    <li><code>Survived</code> (contains your binary predictions: 1 for survived, 0 for deceased)</li>
+                </ul>
+                <h2>Got it! I’m ready to get started. Where do I get help if I need it?</h2>
+                <ul>
+                    <li>For Competition Help: <a href="https://www.kaggle.com/c/titanic/discussion">Titanic Discussion
+                            Forum</a></li>
+                </ul>
+                <p>Kaggle doesn’t have a dedicated team to help troubleshoot your code so you’ll typically find that you
+                    receive a response more quickly by asking your question in the appropriate forum. The forums are
+                    full of useful information on the data, metric, and different approaches. We encourage you to use
+                    the forums often. If you share your knowledge, you'll find that others will share a lot in turn!</p>
+                <h2>A Last Word on Kaggle Notebooks</h2>
+                <p>As we mentioned before, Kaggle Notebooks is our no-setup, customizable, Jupyter Notebooks environment
+                    with free GPUs and a huge repository of community published data &amp; code.</p>
+                <p>In every competition, you’ll find many Notebooks shared with incredible insights. It’s an invaluable
+                    resource worth becoming familiar with. Check out this competition’s Notebooks <a
+                        href="https://www.kaggle.com/c/titanic/notebooks">here</a>.</p>
+                <h2>🏃‍♀Ready to Compete? <a href="https://www.kaggle.com/account/login?returnUrl=%2Fc%2Ftitanic">Join
+                        the Competition Here!</a></h2>
+            </div>
+        </div>
+    </div>
+</div>
