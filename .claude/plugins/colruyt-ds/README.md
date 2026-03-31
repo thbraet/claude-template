@@ -52,6 +52,11 @@ A Claude Code plugin implementing the full **CRISP-DM** (CRoss-Industry Standard
 | `/produce-final-report` | Produce Final Report | 6.3 |
 | `/review-project` | Review Project | 6.4 |
 
+### Code Review
+| Command | Task | Description |
+|---------|------|-------------|
+| `/review-mr` | Code Review | Review branch diff as senior dev/data scientist before merging |
+
 ## Agents
 
 | Agent | Scope |
@@ -62,6 +67,7 @@ A Claude Code plugin implementing the full **CRISP-DM** (CRoss-Industry Standard
 | `modeling` | Phases 4.1–4.4 |
 | `evaluation` | Phases 5.1–5.3 |
 | `deployment` | Phases 6.1–6.4 |
+| `code-review` | MR review before merge |
 
 ## Usage
 
