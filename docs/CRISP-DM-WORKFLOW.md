@@ -7,7 +7,7 @@ How this template maps to the CRISP-DM methodology phases.
 ```
 Phase 1: Business Understanding  -->  /project-charter, /success-criteria, /init-ds-project
 Phase 2: Data Understanding      -->  /eda-notebook, /data-dictionary, /data-quality
-Phase 3: Data Preparation         -->  /feature-doc, /leakage-check, /data-validation
+Phase 3: Data Preparation         -->  /feature-doc, /leakage-check, /data-validation, /select-features
 Phase 4: Modeling                  -->  /baseline-model, /experiment-setup, /error-analysis
 Phase 5: Evaluation                -->  /model-card, /fairness-audit, /model-comparison
 Phase 6: Deployment                -->  /serving-api, /monitoring-config, /runbook
@@ -55,12 +55,14 @@ Phase 6: Deployment                -->  /serving-api, /monitoring-config, /runbo
 - `/feature-doc [feature]` -- Document an engineered feature
 - `/leakage-check [file]` -- Audit for data leakage
 - `/data-validation [dataset]` -- Generate validation suite
+- `/select-features [dataset]` -- Forward selection and overfit gap analysis to find the optimal feature subset
 
 **Agents**:
 - `ml-reviewer` -- Reviews preprocessing code for correctness
 
 **Key Artifacts**:
 - Feature registry in `docs/feature_registry.md`
+- Feature selection report in `docs/crisp-dm/3-data-preparation/3.6-select-features.md`
 - Validation suite
 - Processed data in `data/processed/`
 
