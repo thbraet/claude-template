@@ -95,7 +95,7 @@ Read                  # All file reads
 
 ## MCP Servers (`.mcp.json`)
 
-See `docs/MCP-SERVERS-CATALOG.md` for available servers.
+Pre-configured servers: **GitLab**, **PostgreSQL**, **Notion**. See `docs/MCP-SERVERS-CATALOG.md` for additional servers you can add.
 
 ## Managed Settings (Enterprise)
 

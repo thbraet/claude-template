@@ -91,11 +91,9 @@ Extend permissions for team-specific tools:
 
 ### CLAUDE.md
 
-Add team context to the root `CLAUDE.md` under the team placeholder:
+Add team context to `.claude/CLAUDE.md` (project-specific instructions):
 
 ```markdown
-<!-- TEAM: Add team-specific instructions below this line -->
-
 ## Team: [Your Team Name]
 - Domain: [what your team works on]
 - Data sources: [team-specific data sources]
