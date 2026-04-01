@@ -18,12 +18,12 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 
 | # | Command | Purpose | Status |
 |---|---|---|---|
-| 2.1 | `/data-lineage` | Generate a visual lineage graph: raw → cleaned → features → formatted → model | `[ ]` |
-| 2.2 | `/experiment-compare` | Compare 2+ MLflow runs side-by-side: metrics, parameters, feature importance diffs | `[ ]` |
-| 2.3 | `/validate-pipeline` | End-to-end smoke test: load raw → clean → features → format → predict | `[ ]` |
-| 2.4 | `/generate-submission` | Kaggle-specific: load best model, predict on test set, format submission CSV | `[ ]` |
-| 2.5 | `/assumption-audit` | Scan all CRISP-DM docs for pending assumptions and produce a summary report | `[ ]` |
-| 2.6 | `/init-project` | Bootstrap a new project: directory structure, templates, DVC, project CLAUDE.md | `[ ]` |
+| 2.1 | `/data-lineage` | Generate a visual lineage graph: raw → cleaned → features → formatted → model | `[x]` |
+| 2.2 | `/experiment-compare` | Compare 2+ MLflow runs side-by-side: metrics, parameters, feature importance diffs | `[x]` |
+| 2.3 | `/validate-pipeline` | End-to-end smoke test: load raw → clean → features → format → predict | `[x]` |
+| 2.4 | `/generate-submission` | Kaggle-specific: load best model, predict on test set, format submission CSV | `[x]` |
+| 2.5 | `/assumption-audit` | Scan all CRISP-DM docs for pending assumptions and produce a summary report | `[x]` |
+| 2.6 | `/init-project` | Bootstrap a new project: directory structure, templates, DVC, project CLAUDE.md | `[x]` |
 
 ## 3. Agents
 
