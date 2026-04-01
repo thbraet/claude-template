@@ -62,5 +62,5 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 
 | # | Addition | Purpose | Status |
 |---|---|---|---|
-| 7.1 | Institutional memory patterns | Save common project patterns so future projects inherit team knowledge | `[ ]` |
-| 7.2 | `.claude/prompts/` | Pre-built prompt templates for stakeholder explanations, risk assessments | `[ ]` |
+| 7.1 | Institutional memory patterns | Save common project patterns so future projects inherit team knowledge | `[x]` |
+| 7.2 | `.claude/prompts/` | Pre-built prompt templates for stakeholder explanations, risk assessments | `[x]` |
