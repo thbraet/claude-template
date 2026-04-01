@@ -54,9 +54,9 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 
 | # | Improvement | Purpose | Status |
 |---|---|---|---|
-| 6.1 | Phase transition checklist | `/complete-phase N` validates all artifacts, assumptions, generates completion summary | `[ ]` |
-| 6.2 | Automated doc cross-linking | Ensure every doc's "Source Documents" links back to dependent artifacts | `[ ]` |
-| 6.3 | Template variable substitution | `/init-project` replaces `{{PROJECT_NAME}}`, `{{DATA_SOURCES}}` across templates | `[ ]` |
+| 6.1 | Phase transition checklist | `/complete-phase N` validates all artifacts, assumptions, generates completion summary | `[x]` |
+| 6.2 | Automated doc cross-linking | `/crosslink-docs` verifies and fixes Source Documents references | `[x]` |
+| 6.3 | Template variable substitution | Handled by `/init-project` skill (section 2.6) | `[x]` |
 
 ## 7. Quality-of-Life
 
