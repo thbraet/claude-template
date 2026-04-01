@@ -67,6 +67,17 @@ Use Conventional Commits with optional CRISP-DM phase scope:
 - Run notebooks: `jupyter lab`
 - Run setup: `bash setup.sh`
 
+## Project Documentation
+
+Project-specific source documents (competition briefs, stakeholder notes, meeting minutes, requirement specs) go in `docs/project/`. CRISP-DM phase artifacts go in `docs/crisp-dm/`. General template documentation goes in `docs/`.
+
+```
+docs/
+  project/          # Project-specific source documents
+  crisp-dm/         # CRISP-DM phase artifacts
+  *.md              # General template documentation
+```
+
 ## Data Staging
 
 Raw data is **immutable** — never modify files in `data/raw/`. Each pipeline stage writes new files to `data/processed/`. Reusable logic lives in `src/` modules; notebooks document decisions and call those modules.
