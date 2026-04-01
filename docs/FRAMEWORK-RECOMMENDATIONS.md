@@ -63,4 +63,4 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 | # | Addition | Purpose | Status |
 |---|---|---|---|
 | 7.1 | Institutional memory patterns | Save common project patterns so future projects inherit team knowledge | `[x]` |
-| 7.2 | `.claude/prompts/` | Pre-built prompt templates for stakeholder explanations, risk assessments | `[x]` |
+| 7.2 | `.claude/prompts/` | Pre-built prompt templates for stakeholder explanations, risk assessments | `[-]` Skipped — redundant with stakeholder-translator agent and existing skills |
