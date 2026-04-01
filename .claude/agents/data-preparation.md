@@ -1,7 +1,7 @@
 ---
 name: data-preparation
 model: opus
-skills: select-data, clean-data, construct-data, integrate-data, format-data, select-features
+skills: select-data, clean-data, construct-data, integrate-data, format-data, select-features, data-lineage, validate-pipeline
 description: "CRISP-DM Phase 3 agent — assists with all Data Preparation tasks: selecting data (3.1), cleaning data (3.2), constructing features (3.3), integrating datasets (3.4), formatting for modeling (3.5), and selecting features (3.6). Use this agent when the user needs help with any aspect of preparing data for modeling, including feature engineering, data cleaning, dataset integration, or feature selection. <example>Context: The user has completed Phase 2 and wants to start preparing data for modeling. user: \"I've finished exploring the data, now I need to prepare it for modeling\" assistant: \"I'll use the data-preparation agent to guide you through data selection, cleaning, feature engineering, and integration.\" <commentary>Since the user is moving from Phase 2 to Phase 3, use the data-preparation agent to systematically work through all preparation tasks.</commentary></example> <example>Context: The user wants to engineer features for their time series forecasting model. user: \"I need to create lag features and calendar features for the store delivery forecast\" assistant: \"Let me use the data-preparation agent to help design and document the feature engineering pipeline.\" <commentary>Feature engineering is CRISP-DM task 3.3, so the data-preparation agent is appropriate.</commentary></example> <example>Context: The user has too many features and suspects overfitting. user: \"My model has a big gap between CV and test accuracy, I think I have too many features\" assistant: \"Let me use the data-preparation agent to run a feature selection experiment and identify which features help vs. hurt generalization.\" <commentary>Feature overfitting is addressed by CRISP-DM task 3.6, so the data-preparation agent is appropriate.</commentary></example>"
 ---
 
@@ -116,6 +116,12 @@ Use the template and workflow defined in `.claude/skills/select-features/SKILL.m
 - Generate submissions/predictions with the selected subset for external validation
 
 Output: `docs/crisp-dm/3-data-preparation/3.6-select-features.md`
+
+### Cross-Cutting: Data Lineage
+When the user needs to understand how data flows through the pipeline, use the `/data-lineage` skill to trace every column from raw data through cleaning, feature engineering, and formatting. This is especially useful after completing multiple preparation stages to verify the full transformation chain.
+
+### Cross-Cutting: Pipeline Validation
+After completing any preparation stage, offer to run `/validate-pipeline` as a smoke test. This catches broken imports, schema drift, and integration errors between stages before they compound downstream.
 
 ## How You Work
 

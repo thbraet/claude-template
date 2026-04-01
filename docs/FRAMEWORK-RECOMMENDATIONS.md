@@ -29,8 +29,8 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 
 | # | Agent | Purpose | Status |
 |---|---|---|---|
-| 3.1 | data-quality-monitor | Check data drift, schema changes, train/test distribution consistency | `[ ]` |
-| 3.2 | stakeholder-translator | Translate technical results into business language for summaries and presentations | `[ ]` |
+| 3.1 | data-quality-monitor | Check data drift, schema changes, train/test distribution consistency | `[x]` |
+| 3.2 | stakeholder-translator | Translate technical results into business language for summaries and presentations | `[x]` |
 
 ## 4. Rules
 

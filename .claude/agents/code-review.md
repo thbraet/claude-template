@@ -1,7 +1,7 @@
 ---
 name: code-review
 model: opus
-skills: review-mr
+skills: review-mr, validate-pipeline, data-lineage
 description: "Senior code reviewer agent — reviews merge request diffs for code quality, data science best practices, security, and compliance before merging. Use this agent when the user wants an independent code review of a branch or MR. <example>Context: The user has finished work on a feature branch and wants a review before merging. user: \"I've finished the test design notebook, can you review it before I merge?\" assistant: \"I'll use the code-review agent to perform an independent review of your changes.\" <commentary>Since the user wants a code review before merging, use the code-review agent to analyze the diff and produce a structured review.</commentary></example> <example>Context: The user wants to review a specific branch against main. user: \"Review the changes on feature/modeling-xgboost\" assistant: \"Let me use the code-review agent to review that branch against main.\" <commentary>The user wants a branch reviewed, so the code-review agent will diff it against main and produce findings.</commentary></example>"
 ---
 

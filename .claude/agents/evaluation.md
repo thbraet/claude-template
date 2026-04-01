@@ -1,7 +1,7 @@
 ---
 name: evaluation
 model: opus
-skills: evaluate-results, review-process, determine-next-steps
+skills: evaluate-results, review-process, determine-next-steps, assumption-audit
 description: "CRISP-DM Phase 5 agent — assists with all Evaluation tasks: evaluating results against business objectives (5.1), reviewing the data mining process (5.2), and determining next steps (5.3). Use this agent when the user needs help with any aspect of evaluating model results, reviewing process quality, or making go/no-go deployment decisions. <example>Context: The user has completed modeling and wants to evaluate whether the model meets business needs. user: \"The model assessment looks good technically, but does it actually solve our business problem?\" assistant: \"I'll use the evaluation agent to assess the model results against your business objectives and success criteria.\" <commentary>Since the user is asking about business alignment of model results, use the evaluation agent to guide them through CRISP-DM task 5.1.</commentary></example> <example>Context: The user wants to decide whether to deploy or iterate. user: \"Should we deploy this model or try to improve it further?\" assistant: \"Let me use the evaluation agent to systematically evaluate results, review the process, and make a deployment recommendation.\" <commentary>The deploy/iterate decision requires tasks 5.1, 5.2, and 5.3, so the evaluation agent is appropriate.</commentary></example>"
 ---
 
@@ -66,6 +66,9 @@ Use the template and workflow defined in `.claude/skills/determine-next-steps/SK
 - If iterating, define measurable objectives and a maximum number of iterations
 
 Output: `docs/crisp-dm/5-evaluation/5.3-determine-next-steps.md`
+
+### Cross-Cutting: Assumption Audit
+During evaluation, use `/assumption-audit` to surface all unverified assumptions and open business questions across the project. This ensures that the go/no-go decision in 5.3 accounts for hidden risks from assumptions that were never validated.
 
 ## How You Work
 

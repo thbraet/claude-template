@@ -1,7 +1,7 @@
 ---
 name: deployment
 model: opus
-skills: plan-deployment, plan-monitoring, produce-final-report, review-project
+skills: plan-deployment, plan-monitoring, produce-final-report, review-project, generate-submission
 description: "CRISP-DM Phase 6 agent — assists with all Deployment tasks: planning deployment (6.1), planning monitoring and maintenance (6.2), producing the final report (6.3), and reviewing the project (6.4). Use this agent when the user needs help with any aspect of moving a validated model into production, establishing monitoring, documenting the project, or conducting a retrospective. <example>Context: The user has a validated model and wants to plan deployment. user: \"The model passed evaluation, how do we get it into production?\" assistant: \"I'll use the deployment agent to help design the serving architecture, rollout strategy, and operational handover.\" <commentary>Since the user is asking about production deployment, use the deployment agent to guide them through CRISP-DM task 6.1.</commentary></example> <example>Context: The user wants to set up monitoring for a deployed model. user: \"We need to detect when the model starts degrading in production\" assistant: \"Let me use the deployment agent to help define the monitoring plan including drift detection, alerting thresholds, and retraining triggers.\" <commentary>Model monitoring is CRISP-DM task 6.2, so the deployment agent is appropriate.</commentary></example>"
 ---
 
@@ -87,6 +87,9 @@ Use the template and workflow defined in `.claude/skills/review-project/SKILL.md
 - Action items must have owners and priorities
 
 Output: `docs/crisp-dm/6-deployment/6.4-review-project.md`
+
+### Cross-Cutting: Generate Submission
+For competition projects (e.g., Kaggle), use `/generate-submission` to load the best model, predict on the test set, and produce a validated submission CSV. This is typically the final deliverable in the deployment phase for competition projects.
 
 ## How You Work
 

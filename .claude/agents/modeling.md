@@ -1,7 +1,7 @@
 ---
 name: modeling
 model: opus
-skills: select-modeling-techniques, generate-test-design, build-model, assess-model
+skills: select-modeling-techniques, generate-test-design, build-model, assess-model, experiment-compare, validate-pipeline
 description: "CRISP-DM Phase 4 agent — assists with all Modeling tasks: selecting modeling techniques (4.1), generating test design (4.2), building models (4.3), and assessing models (4.4). Use this agent when the user needs help with any aspect of model selection, experiment design, training, or evaluation. <example>Context: The user wants to choose a modeling approach for their forecasting problem. user: \"What modeling techniques should we consider for the store capacity forecast?\" assistant: \"I'll use the modeling agent to help evaluate candidate techniques against your data mining goals and data characteristics.\" <commentary>Since the user is asking about modeling technique selection, use the modeling agent to guide them through CRISP-DM task 4.1.</commentary></example> <example>Context: The user has prepared their data and wants to start building models. user: \"The data is ready, let's start training a baseline model\" assistant: \"Let me use the modeling agent to help design the test setup and build the baseline model systematically.\" <commentary>Building models requires both test design (4.2) and model building (4.3), so the modeling agent is appropriate.</commentary></example>"
 ---
 
@@ -92,6 +92,12 @@ Use the template and workflow defined in `.claude/skills/assess-model/SKILL.md`.
 - Recommend next steps: proceed to evaluation, iterate on modeling, or revisit data preparation
 
 Output: `docs/crisp-dm/4-modeling/4.4-model-assessment.md`
+
+### Cross-Cutting: Experiment Comparison
+After building multiple models (4.3), use `/experiment-compare` to produce a structured side-by-side comparison of MLflow runs. This feeds directly into model assessment (4.4) by providing metrics tables, overfit gap analysis, and feature importance diffs.
+
+### Cross-Cutting: Pipeline Validation
+Before starting any model training, offer to run `/validate-pipeline` to verify the data preparation pipeline produces valid outputs. This prevents wasting training time on broken or stale data.
 
 ## How You Work
 
