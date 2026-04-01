@@ -36,10 +36,10 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 
 | # | Rule | Scope | Purpose | Status |
 |---|---|---|---|---|
-| 4.1 | experiment-tracking | `notebooks/4.*.ipynb` | Every modeling notebook must log to MLflow with run name, params, metrics | `[ ]` |
-| 4.2 | data-staging | `data/**` | Enforce raw → processed pipeline; prevent writing to `data/raw/` | `[ ]` |
-| 4.3 | feature-documentation | `src/features.py`, `notebooks/3.3*` | Every feature must have docstring with formula, source, rationale | `[ ]` |
-| 4.4 | reproducibility | `**/*.py`, `**/*.ipynb` | Random seeds must be set; no `shuffle=True` without explicit seed | `[ ]` |
+| 4.1 | experiment-tracking | `notebooks/4.*.ipynb` | Every modeling notebook must log to MLflow with run name, params, metrics | `[x]` |
+| 4.2 | data-staging | `data/**` | Enforce raw → processed pipeline; prevent writing to `data/raw/` | `[x]` |
+| 4.3 | feature-documentation | `src/features.py`, `notebooks/3.3*` | Every feature must have docstring with formula, source, rationale | `[x]` |
+| 4.4 | reproducibility | `**/*.py`, `**/*.ipynb` | Random seeds must be set; no `shuffle=True` without explicit seed | `[x]` |
 
 ## 5. MCP Servers
 
