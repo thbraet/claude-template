@@ -62,3 +62,50 @@ Use Conventional Commits with optional CRISP-DM phase scope:
 - Every engineered feature must be documented (name, formula, source, rationale)
 - Check for data leakage at every stage
 
+## Development
+- Activate environment: `source .venv/bin/activate`
+- Run notebooks: `jupyter lab`
+- Run setup: `bash setup.sh`
+
+## Data Staging
+
+Raw data is **immutable** — never modify files in `data/raw/`. Each pipeline stage writes new files to `data/processed/`. Reusable logic lives in `src/` modules; notebooks document decisions and call those modules.
+
+**Rules:**
+- Each stage reads from the previous stage's output (or `data/raw/` for the first stage)
+- All imputers/encoders/scalers are fit on **train only**, then applied to test
+- `src/` functions are pure: DataFrame in → DataFrame out, no side effects
+- Notebooks call `src/` functions and write results to `data/processed/`
+
+## Assumptions & Business Validation Convention
+
+Every CRISP-DM reporting doc (`docs/crisp-dm/**/*.md`) includes an **"Assumptions & Business Validation"** section (placed before "Source Documents") with three subsections:
+
+1. **Assumptions Made** — table with columns: ID, Assumption, Category, Rationale, Status. IDs follow the pattern `A{task}-{n}` (e.g., `A3.2-1`). Status is one of: `Pending verification`, `Verified`, `Reworked (see feedback)`, `Rejected`.
+2. **Questions for Business** — table with columns: ID, Question, Related Assumption, Priority, Status. IDs follow `Q{task}-{n}`. Status is one of: `Open`, `Answered`, `Closed`.
+3. **Business Feedback Log** — table with columns: Date, Feedback Source, Related Assumption/Question, Feedback, Action Taken, Code/Doc Changes.
+
+**When business feedback is received:**
+1. Log the feedback in the relevant doc's Business Feedback Log
+2. Update the related Assumption status (to `Verified`, `Reworked`, or `Rejected`)
+3. Update the related Question status (to `Answered` or `Closed`)
+4. Implement any required code changes
+5. Document the code/doc changes in the feedback log row
+
+## Conventions
+
+### Notebook Path Resolution
+Never use hardcoded relative paths (`../data/` or `data/`) in Jupyter notebooks. Instead, dynamically resolve the project root so notebooks work regardless of the kernel's working directory (VS Code sets cwd to project root; terminal/nbconvert may use `notebooks/`).
+
+Every notebook's first code cell must include:
+```python
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent if "__file__" in dir() else Path.cwd()
+if (PROJECT_ROOT / "notebooks").is_dir():
+    pass  # cwd is project root
+elif (PROJECT_ROOT.parent / "notebooks").is_dir():
+    PROJECT_ROOT = PROJECT_ROOT.parent  # cwd is a subdirectory
+```
+Use `PROJECT_ROOT`-based paths for all file access in notebooks.
+
