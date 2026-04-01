@@ -8,11 +8,11 @@ Status legend: `[ ]` = TODO, `[x]` = Done, `[-]` = Skipped
 
 | # | Hook | Trigger | Purpose | Status |
 |---|---|---|---|---|
-| 1.1 | Notebook lint | `PostToolUse` on Write to `*.ipynb` | Validate notebook has PROJECT_ROOT cell, markdown headers, no hardcoded paths | `[ ]` |
-| 1.2 | Data leakage check | `PostToolUse` on Write to `src/*.py` | Grep for `.fit(` calls that don't guard against test data | `[ ]` |
-| 1.3 | PII scanner | `PreToolUse` on Write to `data/` | Warn if writing files containing email/phone/BSN patterns | `[ ]` |
-| 1.4 | CRISP-DM phase gate | `PreToolUse` on skills | Verify prerequisite artifacts exist before running a later-phase skill | `[ ]` |
-| 1.5 | Large file guard | `PreToolUse` on `git commit` | Warn if staging files >10MB (should use DVC/LFS) | `[ ]` |
+| 1.1 | Notebook lint | `PostToolUse` on Write to `*.ipynb` | Validate notebook has PROJECT_ROOT cell, markdown headers, no hardcoded paths | `[x]` |
+| 1.2 | Data leakage check | `PostToolUse` on Write to `src/*.py` | Grep for `.fit(` calls that don't guard against test data | `[x]` |
+| 1.3 | PII scanner | `PreToolUse` on Write to `data/` | Warn if writing files containing email/phone/BSN patterns | `[x]` |
+| 1.4 | CRISP-DM phase gate | `PreToolUse` on skills | Verify prerequisite artifacts exist before running a later-phase skill | `[x]` |
+| 1.5 | Large file guard | `PreToolUse` on `git commit` | Warn if staging files >10MB (should use DVC/LFS) | `[x]` |
 
 ## 2. Skills / Commands
 

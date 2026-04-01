@@ -67,6 +67,48 @@
             "type": "command",
             "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qiE '\\.(env|pem|key|crt|p12|pfx|jks)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"Command references a sensitive file type\"}}'; fi",
             "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "cat | bash .claude/scripts/hooks/large-file-guard.sh",
+            "timeout": 10000
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat | bash .claude/scripts/hooks/pii-scanner.sh",
+            "timeout": 10000
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat | bash .claude/scripts/hooks/phase-gate.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat | bash .claude/scripts/hooks/notebook-lint.sh",
+            "timeout": 10000
+          },
+          {
+            "type": "command",
+            "command": "cat | bash .claude/scripts/hooks/data-leakage-check.sh",
+            "timeout": 5000
           }
         ]
       }
