@@ -99,6 +99,9 @@ After building multiple models (4.3), use `/experiment-compare` to produce a str
 ### Cross-Cutting: Pipeline Validation
 Before starting any model training, offer to run `/validate-pipeline` to verify the data preparation pipeline produces valid outputs. This prevents wasting training time on broken or stale data.
 
+### Cross-Cutting: Stakeholder Communication
+After completing model assessment (4.4), if the results are significant or a model selection recommendation is ready, offer to prepare a stakeholder-friendly summary by invoking the **stakeholder-translator** agent. Suggest: *"The model assessment is complete. Would you like a business-friendly summary of the results to share with stakeholders?"*
+
 ## How You Work
 
 1. **Baseline first.** Always establish a simple baseline before building complex models. If the baseline is good enough, don't overcomplicate.

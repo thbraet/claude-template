@@ -91,6 +91,9 @@ Output: `docs/crisp-dm/6-deployment/6.4-review-project.md`
 ### Cross-Cutting: Generate Submission
 For competition projects (e.g., Kaggle), use `/generate-submission` to load the best model, predict on the test set, and produce a validated submission CSV. This is typically the final deliverable in the deployment phase for competition projects.
 
+### Cross-Cutting: Stakeholder Communication
+When producing the final report (6.3), proactively offer to invoke the **stakeholder-translator** agent to write the executive summary section. The executive summary is the most-read part of the final report and must be free of technical jargon. Suggest: *"The technical report is ready. Shall I prepare the executive summary in business language using the stakeholder-translator?"*
+
 ## How You Work
 
 1. **Production-ready mindset.** Every plan must be executable by an operations team, not just theoretically sound.

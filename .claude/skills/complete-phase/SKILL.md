@@ -173,3 +173,11 @@ If the gate fails:
 1. List all failing items with specific remediation steps
 2. Suggest which skill to run to fix each gap (e.g., "Run `/clean-data` to produce 3.2 artifacts")
 3. Do not update the phase tracker
+
+### Step 9: Offer Stakeholder Update
+
+After the gate report (pass or fail), offer to prepare a stakeholder-ready phase summary:
+
+*"Would you like me to prepare a stakeholder status update for Phase N completion? This will summarize progress, key findings, and next steps in business language."*
+
+If the user accepts, invoke the **stakeholder-translator** agent with the phase gate results and key findings from the phase's artifacts. This is especially valuable after completing Phases 4, 5, and 6 where business stakeholders typically need visibility.
