@@ -1,92 +1,63 @@
 # Claude Code Template for Colruyt Group
 
-A copy-paste template that configures [Claude Code](https://docs.anthropic.com/en/docs/claude-code) for data science projects following the **CRISP-DM** methodology.
+A reusable template that configures [Claude Code](https://docs.anthropic.com/en/docs/claude-code) for data science projects following the **CRISP-DM** methodology.
 
 ## Quick Start
 
-### Prerequisites
+### As a Git Submodule (recommended)
 
-- [Node.js](https://nodejs.org/) (for Claude Code and npx-based MCP servers)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed: `npm install -g @anthropic-ai/claude-code`
+Add this template as the `.claude/` directory of your project:
 
-### New (Greenfield) Project
+```bash
+cd /path/to/my-project
+git submodule add https://github.com/thbraet/claude-template.git .claude
+```
+
+Then create a root `CLAUDE.md` in your project with project-specific context:
+
+```markdown
+# Project: My Project Name
+
+@.claude/CLAUDE.md
+
+## Business Objective
+...
+
+## Data Sources
+...
+```
+
+### Update the Submodule
+
+```bash
+git submodule update --remote .claude
+git add .claude
+git commit -m "chore: update claude-template submodule"
+```
+
+### Standalone (copy-paste)
 
 ```bash
 git clone --depth 1 https://github.com/thbraet/claude-template.git /tmp/claude-template
-
 cp -r /tmp/claude-template/.claude /path/to/my-project/
-cp /tmp/claude-template/CLAUDE.md /path/to/my-project/
-cp /tmp/claude-template/.mcp.json /path/to/my-project/
-cp /tmp/claude-template/CRISP-DM.md /path/to/my-project/
+rm -rf /tmp/claude-template
 
 # Add Claude-specific entries to your .gitignore
 echo -e '\n# Claude Code\n.claude/settings.local.json\n.claude/agent-memory-local/' >> /path/to/my-project/.gitignore
-
-rm -rf /tmp/claude-template
-
-# Edit placeholders in CLAUDE.md and .claude/CLAUDE.md for your project
-```
-
-### Existing (Brownfield) Project
-
-```bash
-git clone --depth 1 https://github.com/thbraet/claude-template.git /tmp/claude-template
-cd /path/to/my-project
-
-# Safe to copy directly -- these won't overwrite existing project files
-cp -r /tmp/claude-template/.claude/rules/ .claude/rules/
-cp -r /tmp/claude-template/.claude/skills/ .claude/skills/
-cp -r /tmp/claude-template/.claude/agents/ .claude/agents/
-cp -r /tmp/claude-template/.claude/commands/ .claude/commands/
-cp -r /tmp/claude-template/.claude/plugins/ .claude/plugins/
-
-# These files may need manual merging if they already exist (cp -n = no-clobber)
-cp -n /tmp/claude-template/.claude/settings.json .claude/settings.json
-cp -n /tmp/claude-template/.claude/settings.local.json.example .claude/settings.local.json.example
-cp -n /tmp/claude-template/.claude/CLAUDE.md .claude/CLAUDE.md
-cp -n /tmp/claude-template/CLAUDE.md ./CLAUDE.md
-cp -n /tmp/claude-template/.mcp.json ./.mcp.json
-cp -n /tmp/claude-template/CRISP-DM.md ./CRISP-DM.md
-
-# Add Claude-specific entries to your .gitignore
-grep -qxF '.claude/settings.local.json' .gitignore 2>/dev/null || \
-  echo -e '\n# Claude Code\n.claude/settings.local.json\n.claude/agent-memory-local/' >> .gitignore
-
-rm -rf /tmp/claude-template
-```
-
-> **Tip**: Compare before overwriting: `diff .claude/settings.json /tmp/claude-template/.claude/settings.json`
-
-### Team Customization
-
-Fork this repo and customize for your team:
-
-```bash
-git clone https://github.com/<your-org>/claude-template.git
-# Add team-specific rules, skills, agents
-# See docs/TEAM-CUSTOMIZATION.md
-```
-
-Stay up to date with upstream:
-
-```bash
-git remote add upstream https://github.com/thbraet/claude-template.git
-git fetch upstream && git merge upstream/main
 ```
 
 ## What's Included
 
 | Type | Count | Details |
 |---|---|---|
-| **Rules** | 7 | 4 general (security, coding standards, git workflow, compliance) + 3 data science (best practices, notebook standards, model governance) |
-| **Skills** | 24 | CRISP-DM task skills covering all 6 phases |
-| **Agents** | 6 | One per CRISP-DM phase |
-| **Commands** | 27 | CRISP-DM task commands + `/status`, `/next`, `/sync-to-notion` |
-| **Plugins** | 2 marketplace | compound-engineering, data |
+| **Rules** | 11 | Security, coding standards, git workflow, compliance, data science, notebook standards, model governance, etc. |
+| **Skills** | 30+ | CRISP-DM task skills covering all 6 phases |
+| **Agents** | 9 | Phase agents + code review, data quality monitor, stakeholder translator |
+| **Commands** | 27+ | CRISP-DM task commands + `/status`, `/next`, `/sync-to-notion` |
+| **Plugins** | 1 | colruyt-ds local plugin |
 | **MCP Servers** | 3 | GitLab, Postgres, Notion |
-| **Hooks** | 1 | PreToolUse sensitive file guard |
-| **CLAUDE.md** | 2 | Root (org-wide standards), `.claude/` (project-specific template) |
-| **Docs** | 4 | Config reference, team customization, CRISP-DM workflow, MCP catalog |
+| **Hooks** | 5 | Large file guard, PII scanner, notebook lint, data leakage check, phase gate |
+| **Docs** | 5 | Config reference, team customization, CRISP-DM workflow, framework recommendations, MCP catalog |
 
 ## CRISP-DM Coverage
 
@@ -107,23 +78,28 @@ Utility commands: `/status` (phase progress dashboard), `/next` (suggest next ta
 
 ```
 claude-template/
-├── CLAUDE.md                          # Org-wide instructions (language, git, security, DS principles)
-├── CRISP-DM.md                        # Full CRISP-DM reference model
-├── .mcp.json                          # MCP server configuration (GitLab, Postgres, Notion)
-├── .claude/
-│   ├── CLAUDE.md                      # Project-specific template (fill in per project)
-│   ├── settings.json                  # Permissions, model, hooks, plugins
-│   ├── settings.local.json.example    # Personal overrides reference
-│   ├── rules/                         # 7 glob-scoped rules
-│   ├── skills/                        # 24 CRISP-DM task skills
-│   ├── agents/                        # 6 phase agents
-│   ├── commands/                      # 27 task + utility commands
-│   └── plugins/colruyt-ds/            # Local plugin scaffold
-└── docs/
-    ├── CONFIGURATION-REFERENCE.md     # All config options explained
-    ├── TEAM-CUSTOMIZATION.md          # How to fork and extend
-    ├── CRISP-DM-WORKFLOW.md           # Skills mapped to CRISP-DM phases
-    └── MCP-SERVERS-CATALOG.md         # Available MCP servers for data science
+├── README.md                          # This file
+├── .gitignore
+└── .claude/
+    ├── CLAUDE.md                      # Generic Colruyt/CRISP-DM conventions
+    ├── .mcp.json                      # MCP server configuration
+    ├── settings.json                  # Permissions, model, hooks, plugins
+    ├── settings.local.json.example    # Personal overrides reference
+    ├── CRISP-DM-manual.md             # Full CRISP-DM reference model
+    ├── docs/
+    │   ├── CONFIGURATION-REFERENCE.md
+    │   ├── CRISP-DM-WORKFLOW.md
+    │   ├── FRAMEWORK-RECOMMENDATIONS.md
+    │   ├── MCP-SERVERS-CATALOG.md
+    │   └── TEAM-CUSTOMIZATION.md
+    ├── scripts/
+    │   ├── setup.sh                   # Project setup script
+    │   └── hooks/                     # PreToolUse hooks
+    ├── rules/                         # Glob-scoped rules
+    ├── skills/                        # CRISP-DM task skills
+    ├── agents/                        # Phase agents
+    ├── commands/                      # Task + utility commands
+    └── plugins/colruyt-ds/            # Local plugin scaffold
 ```
 
 ## Configuration
@@ -146,10 +122,11 @@ Pre-configured with GitLab, Postgres, and Notion servers. Tokens are referenced 
 
 ## Documentation
 
-- [Configuration Reference](docs/CONFIGURATION-REFERENCE.md) -- All config options
-- [Team Customization](docs/TEAM-CUSTOMIZATION.md) -- How to fork and extend
-- [CRISP-DM Workflow](docs/CRISP-DM-WORKFLOW.md) -- Skills mapped to phases
-- [MCP Servers Catalog](docs/MCP-SERVERS-CATALOG.md) -- Available MCP servers
+- [Configuration Reference](.claude/docs/CONFIGURATION-REFERENCE.md)
+- [Team Customization](.claude/docs/TEAM-CUSTOMIZATION.md)
+- [CRISP-DM Workflow](.claude/docs/CRISP-DM-WORKFLOW.md)
+- [Framework Recommendations](.claude/docs/FRAMEWORK-RECOMMENDATIONS.md)
+- [MCP Servers Catalog](.claude/docs/MCP-SERVERS-CATALOG.md)
 
 ## Contributing
 

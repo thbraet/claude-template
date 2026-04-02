@@ -1,7 +1,0 @@
-artifact_location: file:///Users/tba8ydd/Documents/claude-template/mlruns/447419349310909077
-creation_time: 1774959663987
-experiment_id: '447419349310909077'
-last_update_time: 1774959663987
-lifecycle_stage: active
-name: titanic-survival-modeling
-workspace: default
