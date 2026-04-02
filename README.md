@@ -50,12 +50,12 @@ echo -e '\n# Claude Code\n.claude/settings.local.json\n.claude/agent-memory-loca
 
 | Type | Count | Details |
 |---|---|---|
-| **Rules** | 11 | Security, coding standards, git workflow, compliance, data science, notebook standards, model governance, etc. |
-| **Skills** | 30+ | CRISP-DM task skills covering all 6 phases |
+| **Rules** | 11 | Security, coding standards, git workflow, compliance, data science, notebook standards, model governance, reproducibility, etc. |
+| **Skills** | 34 | CRISP-DM task skills covering all 6 phases + cross-cutting concerns |
 | **Agents** | 9 | Phase agents + code review, data quality monitor, stakeholder translator |
-| **Commands** | 27+ | CRISP-DM task commands + `/status`, `/next`, `/sync-to-notion` |
+| **Commands** | 37 | 28 CRISP-DM task commands + 9 utility commands (`/status`, `/next`, `/sync-to-notion`, etc.) |
 | **Plugins** | 1 | colruyt-ds local plugin |
-| **MCP Servers** | 3 | GitLab, Postgres, Notion |
+| **MCP Servers** | 3 | GitLab, Postgres (read-only), Notion |
 | **Hooks** | 5 | Large file guard, PII scanner, notebook lint, data leakage check, phase gate |
 | **Docs** | 5 | Config reference, team customization, CRISP-DM workflow, framework recommendations, MCP catalog |
 
@@ -63,7 +63,7 @@ echo -e '\n# Claude Code\n.claude/settings.local.json\n.claude/agent-memory-loca
 
 Each CRISP-DM phase has a dedicated agent and task-level skills/commands:
 
-| Phase | Agent | Skills |
+| Phase | Agent | Commands |
 |---|---|---|
 | 1. Business Understanding | `business-understanding` | `/define-business-objectives`, `/assess-situation`, `/determine-data-mining-goals`, `/produce-project-plan` |
 | 2. Data Understanding | `data-understanding` | `/collect-initial-data`, `/describe-data`, `/explore-data`, `/verify-data-quality` |
@@ -72,33 +72,31 @@ Each CRISP-DM phase has a dedicated agent and task-level skills/commands:
 | 5. Evaluation | `evaluation` | `/evaluate-results`, `/review-process`, `/determine-next-steps` |
 | 6. Deployment | `deployment` | `/plan-deployment`, `/plan-monitoring`, `/produce-final-report`, `/review-project` |
 
-Utility commands: `/status` (phase progress dashboard), `/next` (suggest next task), `/sync-to-notion`
+Utility commands: `/status`, `/next`, `/sync-to-notion`, `/assumption-audit`, `/crosslink-docs`, `/data-lineage`, `/experiment-compare`, `/generate-submission`, `/validate-pipeline`, `/review-mr`
 
 ## Directory Structure
 
 ```
 claude-template/                       # Mounts as .claude/ in consumer projects
-├── README.md
-├── .gitignore
-├── CLAUDE.md                          # Generic Colruyt/CRISP-DM conventions
-├── .mcp.json                          # MCP server configuration
+├── CLAUDE.md                          # Colruyt/CRISP-DM conventions
+├── CRISP-DM-manual.md                 # Full CRISP-DM reference model
 ├── settings.json                      # Permissions, model, hooks, plugins
 ├── settings.local.json.example        # Personal overrides reference
-├── CRISP-DM-manual.md                 # Full CRISP-DM reference model
-├── docs/
-│   ├── CONFIGURATION-REFERENCE.md
-│   ├── CRISP-DM-WORKFLOW.md
-│   ├── FRAMEWORK-RECOMMENDATIONS.md
-│   ├── MCP-SERVERS-CATALOG.md
-│   └── TEAM-CUSTOMIZATION.md
+├── .mcp.json                          # MCP server configuration
+├── agents/                            # 9 phase + support agents
+├── commands/                          # 37 task + utility commands
+├── skills/                            # 34 CRISP-DM task skills
+├── rules/                             # 11 glob-scoped rules
 ├── scripts/
 │   ├── setup.sh                       # Project setup script
-│   └── hooks/                         # PreToolUse hooks
-├── rules/                             # Glob-scoped rules
-├── skills/                            # CRISP-DM task skills
-├── agents/                            # Phase agents
-├── commands/                          # Task + utility commands
-└── plugins/colruyt-ds/                # Local plugin scaffold
+│   └── hooks/                         # 5 PreToolUse/PostToolUse hooks
+├── plugins/colruyt-ds/                # Local plugin scaffold
+└── docs/
+    ├── CONFIGURATION-REFERENCE.md
+    ├── CRISP-DM-WORKFLOW.md
+    ├── FRAMEWORK-RECOMMENDATIONS.md
+    ├── MCP-SERVERS-CATALOG.md
+    └── TEAM-CUSTOMIZATION.md
 ```
 
 ## Configuration
@@ -106,18 +104,30 @@ claude-template/                       # Mounts as .claude/ in consumer projects
 ### `settings.json` (shared, committed)
 
 Pre-configured with:
-- Permissions for common data science tools (python, pip, conda, jupyter, pytest, mlflow, dvc, git)
-- Deny rules for destructive operations (`rm -rf`, `git push --force`, `git reset --hard`)
-- PreToolUse hook that flags access to sensitive files (`.env`, `.pem`, `.key`, etc.)
+- Permissions for common data science tools (jupyter, pytest, mlflow, dvc, make)
+- Deny rules for destructive operations (`rm -rf`, `rm -r`, `git push --force`, `git push -f`, `git reset --hard`, `eval`, `python -c`, piped `curl`/`wget`)
+- PreToolUse hooks that flag access to sensitive files (`.env`, `.pem`, `.key`, `.secret`, `.credential`, etc.)
+- PostToolUse hooks for notebook linting and data leakage detection
 - Marketplace plugins: `compound-engineering` and `data`
 
 ### `settings.local.json` (personal, gitignored)
 
-Copy `settings.local.json.example` to `settings.local.json` for personal overrides like API tokens, model preferences, or extra permissions.
+Copy `settings.local.json.example` to `settings.local.json` for personal overrides like API tokens, model preferences, or extra permissions. Store secrets as environment variables in your shell profile and reference them via `${ENV_VAR}` syntax -- never store plaintext tokens in config files.
 
 ### `.mcp.json` (MCP servers)
 
-Pre-configured with GitLab, Postgres, and Notion servers. Tokens are referenced via `${ENV_VAR}` syntax and resolved from `settings.local.json` env vars.
+Pre-configured with GitLab, Postgres (read-only), and Notion servers. Tokens are referenced via `${ENV_VAR}` syntax and resolved from environment variables.
+
+## Security
+
+This template enforces several security guardrails:
+
+- **Sensitive file detection**: PreToolUse hook prompts before accessing `.env`, `.pem`, `.key`, `.secret`, `.credential` files
+- **PII scanning**: PreToolUse hook scans file writes for personally identifiable information
+- **Data leakage checks**: PostToolUse hook validates that preprocessing isn't fit on test data
+- **Large file guard**: PreToolUse hook prevents accidental commits of large data files
+- **Phase gating**: PreToolUse hook ensures skills are invoked in proper CRISP-DM order
+- **Deny list**: Blocks destructive shell commands and arbitrary code execution via `python -c` / `eval`
 
 ## Documentation
 
