@@ -20,9 +20,8 @@
       "Bash(cat *)",
       "Bash(find *)",
       "Bash(grep *)",
-      "Bash(python *)",
-      "Bash(pip *)",
-      "Bash(conda *)",
+      "Bash(python -m pytest *)",
+      "Bash(python -m jupyter *)",
       "Bash(jupyter *)",
       "Bash(pytest *)",
       "Bash(mlflow *)",
@@ -39,10 +38,18 @@
     ],
     "deny": [
       "Bash(rm -rf *)",
+      "Bash(rm -r *)",
+      "Bash(rm -fr *)",
       "Bash(git push --force *)",
+      "Bash(git push -f *)",
       "Bash(git reset --hard *)",
       "Bash(curl * | bash)",
-      "Bash(wget * | bash)"
+      "Bash(curl * | sh)",
+      "Bash(wget * | bash)",
+      "Bash(wget * | sh)",
+      "Bash(eval *)",
+      "Bash(python -c *)",
+      "Bash(python3 -c *)"
     ],
     "defaultMode": "default"
   },
@@ -65,7 +72,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // empty'); if echo \"$CMD\" | grep -qiE '\\.(env|pem|key|crt|p12|pfx|jks)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"Command references a sensitive file type\"}}'; fi",
+            "command": "INPUT=$(cat); CMD=$(printf '%s' \"$INPUT\" | jq -r '.tool_input.command // empty'); if printf '%s' \"$CMD\" | grep -qiE '\\.(env|pem|key|crt|p12|pfx|jks|secret|credential)'; then echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"Command references a sensitive file type\"}}'; fi",
             "timeout": 5000
           },
           {
