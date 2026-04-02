@@ -77,29 +77,28 @@ Utility commands: `/status` (phase progress dashboard), `/next` (suggest next ta
 ## Directory Structure
 
 ```
-claude-template/
-├── README.md                          # This file
+claude-template/                       # Mounts as .claude/ in consumer projects
+├── README.md
 ├── .gitignore
-└── .claude/
-    ├── CLAUDE.md                      # Generic Colruyt/CRISP-DM conventions
-    ├── .mcp.json                      # MCP server configuration
-    ├── settings.json                  # Permissions, model, hooks, plugins
-    ├── settings.local.json.example    # Personal overrides reference
-    ├── CRISP-DM-manual.md             # Full CRISP-DM reference model
-    ├── docs/
-    │   ├── CONFIGURATION-REFERENCE.md
-    │   ├── CRISP-DM-WORKFLOW.md
-    │   ├── FRAMEWORK-RECOMMENDATIONS.md
-    │   ├── MCP-SERVERS-CATALOG.md
-    │   └── TEAM-CUSTOMIZATION.md
-    ├── scripts/
-    │   ├── setup.sh                   # Project setup script
-    │   └── hooks/                     # PreToolUse hooks
-    ├── rules/                         # Glob-scoped rules
-    ├── skills/                        # CRISP-DM task skills
-    ├── agents/                        # Phase agents
-    ├── commands/                      # Task + utility commands
-    └── plugins/colruyt-ds/            # Local plugin scaffold
+├── CLAUDE.md                          # Generic Colruyt/CRISP-DM conventions
+├── .mcp.json                          # MCP server configuration
+├── settings.json                      # Permissions, model, hooks, plugins
+├── settings.local.json.example        # Personal overrides reference
+├── CRISP-DM-manual.md                 # Full CRISP-DM reference model
+├── docs/
+│   ├── CONFIGURATION-REFERENCE.md
+│   ├── CRISP-DM-WORKFLOW.md
+│   ├── FRAMEWORK-RECOMMENDATIONS.md
+│   ├── MCP-SERVERS-CATALOG.md
+│   └── TEAM-CUSTOMIZATION.md
+├── scripts/
+│   ├── setup.sh                       # Project setup script
+│   └── hooks/                         # PreToolUse hooks
+├── rules/                             # Glob-scoped rules
+├── skills/                            # CRISP-DM task skills
+├── agents/                            # Phase agents
+├── commands/                          # Task + utility commands
+└── plugins/colruyt-ds/                # Local plugin scaffold
 ```
 
 ## Configuration
@@ -122,11 +121,11 @@ Pre-configured with GitLab, Postgres, and Notion servers. Tokens are referenced 
 
 ## Documentation
 
-- [Configuration Reference](.claude/docs/CONFIGURATION-REFERENCE.md)
-- [Team Customization](.claude/docs/TEAM-CUSTOMIZATION.md)
-- [CRISP-DM Workflow](.claude/docs/CRISP-DM-WORKFLOW.md)
-- [Framework Recommendations](.claude/docs/FRAMEWORK-RECOMMENDATIONS.md)
-- [MCP Servers Catalog](.claude/docs/MCP-SERVERS-CATALOG.md)
+- [Configuration Reference](docs/CONFIGURATION-REFERENCE.md)
+- [Team Customization](docs/TEAM-CUSTOMIZATION.md)
+- [CRISP-DM Workflow](docs/CRISP-DM-WORKFLOW.md)
+- [Framework Recommendations](docs/FRAMEWORK-RECOMMENDATIONS.md)
+- [MCP Servers Catalog](docs/MCP-SERVERS-CATALOG.md)
 
 ## Contributing
 
