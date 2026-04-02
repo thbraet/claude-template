@@ -87,9 +87,7 @@ claude-template/                       # Mounts as .claude/ in consumer projects
 ├── commands/                          # 37 task + utility commands
 ├── skills/                            # 34 CRISP-DM task skills
 ├── rules/                             # 11 glob-scoped rules
-├── scripts/
-│   ├── setup.sh                       # Project setup script
-│   └── hooks/                         # 5 PreToolUse/PostToolUse hooks
+├── hooks/                             # 5 PreToolUse/PostToolUse hooks
 ├── plugins/colruyt-ds/                # Local plugin scaffold
 └── docs/
     ├── CONFIGURATION-REFERENCE.md

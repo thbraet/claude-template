@@ -77,7 +77,7 @@
           },
           {
             "type": "command",
-            "command": "cat | bash .claude/scripts/hooks/large-file-guard.sh",
+            "command": "cat | bash .claude/hooks/large-file-guard.sh",
             "timeout": 10000
           }
         ]
@@ -87,7 +87,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat | bash .claude/scripts/hooks/pii-scanner.sh",
+            "command": "cat | bash .claude/hooks/pii-scanner.sh",
             "timeout": 10000
           }
         ]
@@ -97,7 +97,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat | bash .claude/scripts/hooks/phase-gate.sh",
+            "command": "cat | bash .claude/hooks/phase-gate.sh",
             "timeout": 5000
           }
         ]
@@ -109,12 +109,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat | bash .claude/scripts/hooks/notebook-lint.sh",
+            "command": "cat | bash .claude/hooks/notebook-lint.sh",
             "timeout": 10000
           },
           {
             "type": "command",
-            "command": "cat | bash .claude/scripts/hooks/data-leakage-check.sh",
+            "command": "cat | bash .claude/hooks/data-leakage-check.sh",
             "timeout": 5000
           }
         ]

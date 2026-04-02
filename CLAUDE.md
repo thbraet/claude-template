@@ -63,7 +63,7 @@ Use Conventional Commits with optional CRISP-DM phase scope:
 ## Development
 - Activate environment: `source .venv/bin/activate`
 - Run notebooks: `jupyter lab`
-- Run setup: `bash scripts/setup.sh`
+
 
 ## Project Documentation
 
